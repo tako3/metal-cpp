@@ -28,19 +28,17 @@
 
 #include "MTLLibrary.hpp"
 
-namespace MTL
-{
-class FunctionHandle : public NS::Referencing<FunctionHandle>
-{
+namespace MTL {
+class FunctionHandle : public NS::Referencing<FunctionHandle> {
 public:
     MTL::FunctionType functionType() const;
 
-    NS::String*       name() const;
+    NS::String* name() const;
 
-    class Device*     device() const;
+    class Device* device() const;
 };
 
-}
+} // namespace MTL
 
 // property: functionType
 _MTL_INLINE MTL::FunctionType MTL::FunctionHandle::functionType() const

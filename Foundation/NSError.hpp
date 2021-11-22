@@ -29,8 +29,7 @@
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace NS
-{
+namespace NS {
 using ErrorDomain = class String*;
 
 _NS_CONST(ErrorDomain, CocoaErrorDomain);
@@ -53,25 +52,24 @@ _NS_CONST(ErrorUserInfoKey, StringEncodingErrorKey);
 _NS_CONST(ErrorUserInfoKey, URLErrorKey);
 _NS_CONST(ErrorUserInfoKey, FilePathErrorKey);
 
-class Error : public Copying<Error>
-{
+class Error : public Copying<Error> {
 public:
-    static Error*     error(ErrorDomain domain, Integer code, class Dictionary* pDictionary);
+    static Error* error(ErrorDomain domain, Integer code, class Dictionary* pDictionary);
 
-    static Error*     alloc();
-    Error*            init();
-    Error*            init(ErrorDomain domain, Integer code, class Dictionary* pDictionary);
+    static Error* alloc();
+    Error* init();
+    Error* init(ErrorDomain domain, Integer code, class Dictionary* pDictionary);
 
-    Integer           code() const;
-    ErrorDomain       domain() const;
+    Integer code() const;
+    ErrorDomain domain() const;
     class Dictionary* userInfo() const;
 
-    class String*     localizedDescription() const;
-    class Array*      localizedRecoveryOptions() const;
-    class String*     localizedRecoverySuggestion() const;
-    class String*     localizedFailureReason() const;
+    class String* localizedDescription() const;
+    class Array* localizedRecoveryOptions() const;
+    class String* localizedRecoverySuggestion() const;
+    class String* localizedFailureReason() const;
 };
-}
+} // namespace NS
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -95,30 +93,28 @@ _NS_PRIVATE_DEF_CONST(NS::ErrorUserInfoKey, FilePathErrorKey);
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-_NS_INLINE NS::Error* NS::Error::error(ErrorDomain domain, Integer code, class Dictionary* pDictionary)
+_NS_INLINE NS::Error* NS::Error::error(
+    ErrorDomain domain, Integer code, class Dictionary* pDictionary)
 {
-    return Object::sendMessage<Error*>(_NS_PRIVATE_CLS(NSError), _NS_PRIVATE_SEL(errorWithDomain_code_userInfo_), domain, code, pDictionary);
+    return Object::sendMessage<Error*>(_NS_PRIVATE_CLS(NSError),
+        _NS_PRIVATE_SEL(errorWithDomain_code_userInfo_), domain, code, pDictionary);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-_NS_INLINE NS::Error* NS::Error::alloc()
-{
-    return Object::alloc<Error>(_NS_PRIVATE_CLS(NSError));
-}
+_NS_INLINE NS::Error* NS::Error::alloc() { return Object::alloc<Error>(_NS_PRIVATE_CLS(NSError)); }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-_NS_INLINE NS::Error* NS::Error::init()
-{
-    return Object::init<Error>();
-}
+_NS_INLINE NS::Error* NS::Error::init() { return Object::init<Error>(); }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-_NS_INLINE NS::Error* NS::Error::init(ErrorDomain domain, Integer code, class Dictionary* pDictionary)
+_NS_INLINE NS::Error* NS::Error::init(
+    ErrorDomain domain, Integer code, class Dictionary* pDictionary)
 {
-    return Object::sendMessage<Error*>(this, _NS_PRIVATE_SEL(initWithDomain_code_userInfo_), domain, code, pDictionary);
+    return Object::sendMessage<Error*>(
+        this, _NS_PRIVATE_SEL(initWithDomain_code_userInfo_), domain, code, pDictionary);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------

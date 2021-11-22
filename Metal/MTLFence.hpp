@@ -26,18 +26,16 @@
 
 #include <Foundation/Foundation.hpp>
 
-namespace MTL
-{
-class Fence : public NS::Referencing<Fence>
-{
+namespace MTL {
+class Fence : public NS::Referencing<Fence> {
 public:
     class Device* device() const;
 
-    NS::String*   label() const;
-    void          setLabel(const NS::String* label);
+    NS::String* label() const;
+    void setLabel(const NS::String* label);
 };
 
-}
+} // namespace MTL
 
 // property: device
 _MTL_INLINE MTL::Device* MTL::Fence::device() const

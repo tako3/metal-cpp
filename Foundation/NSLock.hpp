@@ -10,43 +10,40 @@
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+#include "NSDate.hpp"
 #include "NSDefines.hpp"
 #include "NSObject.hpp"
 #include "NSPrivate.hpp"
 #include "NSTypes.hpp"
-#include "NSDate.hpp"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace NS
-{
+namespace NS {
 
 template <class _Class, class _Base = class Object>
-class Locking : public _Base
-{
+class Locking : public _Base {
 public:
     void lock();
     void unlock();
 };
 
-class Condition : public Locking<Condition>
-{
+class Condition : public Locking<Condition> {
 public:
     static Condition* alloc();
 
-    Condition*        init();
+    Condition* init();
 
-    void              wait();
-    bool              waitUntilDate(Date* pLimit);
-    void              signal();
-    void              broadcast();
+    void wait();
+    bool waitUntilDate(Date* pLimit);
+    void signal();
+    void broadcast();
 };
 
-} // NS
+} // namespace NS
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-template<class _Class, class _Base /* = NS::Object */>
+template <class _Class, class _Base /* = NS::Object */>
 _NS_INLINE void NS::Locking<_Class, _Base>::lock()
 {
     NS::Object::sendMessage<void>(this, _NS_PRIVATE_SEL(lock));
@@ -54,7 +51,7 @@ _NS_INLINE void NS::Locking<_Class, _Base>::lock()
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-template<class _Class, class _Base /* = NS::Object */>
+template <class _Class, class _Base /* = NS::Object */>
 _NS_INLINE void NS::Locking<_Class, _Base>::unlock()
 {
     NS::Object::sendMessage<void>(this, _NS_PRIVATE_SEL(unlock));
@@ -69,10 +66,7 @@ _NS_INLINE NS::Condition* NS::Condition::alloc()
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-_NS_INLINE NS::Condition* NS::Condition::init()
-{
-    return NS::Object::init<NS::Condition>();
-}
+_NS_INLINE NS::Condition* NS::Condition::init() { return NS::Object::init<NS::Condition>(); }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 

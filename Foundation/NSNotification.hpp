@@ -30,18 +30,16 @@
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace NS
-{
+namespace NS {
 using NotificationName = class String*;
 
-class Notification : public NS::Referencing<Notification>
-{
+class Notification : public NS::Referencing<Notification> {
 public:
-    NS::String*     name() const;
-    NS::Object*     object() const;
+    NS::String* name() const;
+    NS::Object* object() const;
     NS::Dictionary* userInfo() const;
 };
-}
+} // namespace NS
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 

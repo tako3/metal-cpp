@@ -28,34 +28,33 @@
 
 #include "MTLResource.hpp"
 
-namespace MTL
-{
-_MTL_ENUM(NS::UInteger, PurgeableState) {
+namespace MTL {
+_MTL_ENUM(NS::UInteger, PurgeableState){
     PurgeableStateKeepCurrent = 1,
     PurgeableStateNonVolatile = 2,
     PurgeableStateVolatile = 3,
     PurgeableStateEmpty = 4,
 };
 
-_MTL_ENUM(NS::UInteger, CPUCacheMode) {
+_MTL_ENUM(NS::UInteger, CPUCacheMode){
     CPUCacheModeDefaultCache = 0,
     CPUCacheModeWriteCombined = 1,
 };
 
-_MTL_ENUM(NS::UInteger, StorageMode) {
+_MTL_ENUM(NS::UInteger, StorageMode){
     StorageModeShared = 0,
     StorageModeManaged = 1,
     StorageModePrivate = 2,
     StorageModeMemoryless = 3,
 };
 
-_MTL_ENUM(NS::UInteger, HazardTrackingMode) {
+_MTL_ENUM(NS::UInteger, HazardTrackingMode){
     HazardTrackingModeDefault = 0,
     HazardTrackingModeUntracked = 1,
     HazardTrackingModeTracked = 2,
 };
 
-_MTL_OPTIONS(NS::UInteger, ResourceOptions) {
+_MTL_OPTIONS(NS::UInteger, ResourceOptions){
     ResourceStorageModeShared = 0,
     ResourceHazardTrackingModeDefault = 0,
     ResourceCPUCacheModeDefaultCache = 0,
@@ -69,36 +68,35 @@ _MTL_OPTIONS(NS::UInteger, ResourceOptions) {
     ResourceHazardTrackingModeTracked = 512,
 };
 
-class Resource : public NS::Referencing<Resource>
-{
+class Resource : public NS::Referencing<Resource> {
 public:
-    NS::String*             label() const;
-    void                    setLabel(const NS::String* label);
+    NS::String* label() const;
+    void setLabel(const NS::String* label);
 
-    class Device*           device() const;
+    class Device* device() const;
 
-    MTL::CPUCacheMode       cpuCacheMode() const;
+    MTL::CPUCacheMode cpuCacheMode() const;
 
-    MTL::StorageMode        storageMode() const;
+    MTL::StorageMode storageMode() const;
 
     MTL::HazardTrackingMode hazardTrackingMode() const;
 
-    MTL::ResourceOptions    resourceOptions() const;
+    MTL::ResourceOptions resourceOptions() const;
 
-    MTL::PurgeableState     setPurgeableState(MTL::PurgeableState state);
+    MTL::PurgeableState setPurgeableState(MTL::PurgeableState state);
 
-    class Heap*             heap() const;
+    class Heap* heap() const;
 
-    NS::UInteger            heapOffset() const;
+    NS::UInteger heapOffset() const;
 
-    NS::UInteger            allocatedSize() const;
+    NS::UInteger allocatedSize() const;
 
-    void                    makeAliasable();
+    void makeAliasable();
 
-    bool                    isAliasable();
+    bool isAliasable();
 };
 
-}
+} // namespace MTL
 
 // property: label
 _MTL_INLINE NS::String* MTL::Resource::label() const
@@ -144,7 +142,8 @@ _MTL_INLINE MTL::ResourceOptions MTL::Resource::resourceOptions() const
 // method: setPurgeableState:
 _MTL_INLINE MTL::PurgeableState MTL::Resource::setPurgeableState(MTL::PurgeableState state)
 {
-    return Object::sendMessage<MTL::PurgeableState>(this, _MTL_PRIVATE_SEL(setPurgeableState_), state);
+    return Object::sendMessage<MTL::PurgeableState>(
+        this, _MTL_PRIVATE_SEL(setPurgeableState_), state);
 }
 
 // property: heap

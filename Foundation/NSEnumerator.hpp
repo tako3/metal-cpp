@@ -27,36 +27,35 @@
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace NS
-{
-struct FastEnumerationState
-{
-    unsigned long  state;
-    Object**       itemsPtr;
+namespace NS {
+struct FastEnumerationState {
+    unsigned long state;
+    Object** itemsPtr;
     unsigned long* mutationsPtr;
-    unsigned long  extra[5];
+    unsigned long extra[5];
 } _NS_PACKED;
 
-class FastEnumeration : public Referencing<FastEnumeration>
-{
+class FastEnumeration : public Referencing<FastEnumeration> {
 public:
-    NS::UInteger countByEnumerating(FastEnumerationState* pState, Object** pBuffer, NS::UInteger len);
+    NS::UInteger countByEnumerating(
+        FastEnumerationState* pState, Object** pBuffer, NS::UInteger len);
 };
 
 template <class _ObjectType>
-class Enumerator : public Referencing<Enumerator<_ObjectType>, FastEnumeration>
-{
+class Enumerator : public Referencing<Enumerator<_ObjectType>, FastEnumeration> {
 public:
     _ObjectType* nextObject();
     class Array* allObjects();
 };
-}
+} // namespace NS
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-_NS_INLINE NS::UInteger NS::FastEnumeration::countByEnumerating(FastEnumerationState* pState, Object** pBuffer, NS::UInteger len)
+_NS_INLINE NS::UInteger NS::FastEnumeration::countByEnumerating(
+    FastEnumerationState* pState, Object** pBuffer, NS::UInteger len)
 {
-    return Object::sendMessage<UInteger>(this, _NS_PRIVATE_SEL(countByEnumeratingWithState_objects_count_), pState, pBuffer, len);
+    return Object::sendMessage<UInteger>(
+        this, _NS_PRIVATE_SEL(countByEnumeratingWithState_objects_count_), pState, pBuffer, len);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------

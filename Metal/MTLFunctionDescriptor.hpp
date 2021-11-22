@@ -28,47 +28,45 @@
 
 #include "MTLFunctionDescriptor.hpp"
 
-namespace MTL
-{
-_MTL_OPTIONS(NS::UInteger, FunctionOptions) {
+namespace MTL {
+_MTL_OPTIONS(NS::UInteger, FunctionOptions){
     FunctionOptionNone = 0,
     FunctionOptionCompileToBinary = 1,
 };
 
-class FunctionDescriptor : public NS::Copying<FunctionDescriptor>
-{
+class FunctionDescriptor : public NS::Copying<FunctionDescriptor> {
 public:
     static class FunctionDescriptor* alloc();
 
-    class FunctionDescriptor*        init();
+    class FunctionDescriptor* init();
 
     static class FunctionDescriptor* functionDescriptor();
 
-    NS::String*                      name() const;
-    void                             setName(const NS::String* name);
+    NS::String* name() const;
+    void setName(const NS::String* name);
 
-    NS::String*                      specializedName() const;
-    void                             setSpecializedName(const NS::String* specializedName);
+    NS::String* specializedName() const;
+    void setSpecializedName(const NS::String* specializedName);
 
-    class FunctionConstantValues*    constantValues() const;
-    void                             setConstantValues(const class FunctionConstantValues* constantValues);
+    class FunctionConstantValues* constantValues() const;
+    void setConstantValues(const class FunctionConstantValues* constantValues);
 
-    MTL::FunctionOptions             options() const;
-    void                             setOptions(MTL::FunctionOptions options);
+    MTL::FunctionOptions options() const;
+    void setOptions(MTL::FunctionOptions options);
 
-    NS::Array*                       binaryArchives() const;
-    void                             setBinaryArchives(const NS::Array* binaryArchives);
+    NS::Array* binaryArchives() const;
+    void setBinaryArchives(const NS::Array* binaryArchives);
 };
 
-class IntersectionFunctionDescriptor : public NS::Copying<IntersectionFunctionDescriptor, MTL::FunctionDescriptor>
-{
+class IntersectionFunctionDescriptor
+    : public NS::Copying<IntersectionFunctionDescriptor, MTL::FunctionDescriptor> {
 public:
     static class IntersectionFunctionDescriptor* alloc();
 
-    class IntersectionFunctionDescriptor*        init();
+    class IntersectionFunctionDescriptor* init();
 };
 
-}
+} // namespace MTL
 
 // static method: alloc
 _MTL_INLINE MTL::FunctionDescriptor* MTL::FunctionDescriptor::alloc()
@@ -85,7 +83,8 @@ _MTL_INLINE MTL::FunctionDescriptor* MTL::FunctionDescriptor::init()
 // static method: functionDescriptor
 _MTL_INLINE MTL::FunctionDescriptor* MTL::FunctionDescriptor::functionDescriptor()
 {
-    return Object::sendMessage<MTL::FunctionDescriptor*>(_MTL_PRIVATE_CLS(MTLFunctionDescriptor), _MTL_PRIVATE_SEL(functionDescriptor));
+    return Object::sendMessage<MTL::FunctionDescriptor*>(
+        _MTL_PRIVATE_CLS(MTLFunctionDescriptor), _MTL_PRIVATE_SEL(functionDescriptor));
 }
 
 // property: name
@@ -113,10 +112,12 @@ _MTL_INLINE void MTL::FunctionDescriptor::setSpecializedName(const NS::String* s
 // property: constantValues
 _MTL_INLINE MTL::FunctionConstantValues* MTL::FunctionDescriptor::constantValues() const
 {
-    return Object::sendMessage<MTL::FunctionConstantValues*>(this, _MTL_PRIVATE_SEL(constantValues));
+    return Object::sendMessage<MTL::FunctionConstantValues*>(
+        this, _MTL_PRIVATE_SEL(constantValues));
 }
 
-_MTL_INLINE void MTL::FunctionDescriptor::setConstantValues(const MTL::FunctionConstantValues* constantValues)
+_MTL_INLINE void MTL::FunctionDescriptor::setConstantValues(
+    const MTL::FunctionConstantValues* constantValues)
 {
     Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(setConstantValues_), constantValues);
 }
@@ -146,7 +147,8 @@ _MTL_INLINE void MTL::FunctionDescriptor::setBinaryArchives(const NS::Array* bin
 // static method: alloc
 _MTL_INLINE MTL::IntersectionFunctionDescriptor* MTL::IntersectionFunctionDescriptor::alloc()
 {
-    return NS::Object::alloc<MTL::IntersectionFunctionDescriptor>(_MTL_PRIVATE_CLS(MTLIntersectionFunctionDescriptor));
+    return NS::Object::alloc<MTL::IntersectionFunctionDescriptor>(
+        _MTL_PRIVATE_CLS(MTLIntersectionFunctionDescriptor));
 }
 
 // method: init

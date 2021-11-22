@@ -29,9 +29,8 @@
 #include "MTLArgument.hpp"
 #include "MTLTexture.hpp"
 
-namespace MTL
-{
-_MTL_ENUM(NS::UInteger, DataType) {
+namespace MTL {
+_MTL_ENUM(NS::UInteger, DataType){
     DataTypeNone = 0,
     DataTypeStruct = 1,
     DataTypeArray = 2,
@@ -125,7 +124,7 @@ _MTL_ENUM(NS::UInteger, DataType) {
     DataTypeInstanceAccelerationStructure = 118,
 };
 
-_MTL_ENUM(NS::UInteger, ArgumentType) {
+_MTL_ENUM(NS::UInteger, ArgumentType){
     ArgumentTypeBuffer = 0,
     ArgumentTypeThreadgroupMemory = 1,
     ArgumentTypeTexture = 2,
@@ -138,161 +137,154 @@ _MTL_ENUM(NS::UInteger, ArgumentType) {
     ArgumentTypeIntersectionFunctionTable = 27,
 };
 
-_MTL_ENUM(NS::UInteger, ArgumentAccess) {
+_MTL_ENUM(NS::UInteger, ArgumentAccess){
     ArgumentAccessReadOnly = 0,
     ArgumentAccessReadWrite = 1,
     ArgumentAccessWriteOnly = 2,
 };
 
-class Type : public NS::Referencing<Type>
-{
+class Type : public NS::Referencing<Type> {
 public:
     static class Type* alloc();
 
-    class Type*        init();
+    class Type* init();
 
-    MTL::DataType      dataType() const;
+    MTL::DataType dataType() const;
 };
 
-class StructMember : public NS::Referencing<StructMember>
-{
+class StructMember : public NS::Referencing<StructMember> {
 public:
-    static class StructMember*  alloc();
+    static class StructMember* alloc();
 
-    class StructMember*         init();
+    class StructMember* init();
 
-    NS::String*                 name() const;
+    NS::String* name() const;
 
-    NS::UInteger                offset() const;
+    NS::UInteger offset() const;
 
-    MTL::DataType               dataType() const;
+    MTL::DataType dataType() const;
 
-    class StructType*           structType();
+    class StructType* structType();
 
-    class ArrayType*            arrayType();
+    class ArrayType* arrayType();
 
     class TextureReferenceType* textureReferenceType();
 
-    class PointerType*          pointerType();
+    class PointerType* pointerType();
 
-    NS::UInteger                argumentIndex() const;
+    NS::UInteger argumentIndex() const;
 };
 
-class StructType : public NS::Referencing<StructType, Type>
-{
+class StructType : public NS::Referencing<StructType, Type> {
 public:
     static class StructType* alloc();
 
-    class StructType*        init();
+    class StructType* init();
 
-    NS::Array*               members() const;
+    NS::Array* members() const;
 
-    class StructMember*      memberByName(const NS::String* name);
+    class StructMember* memberByName(const NS::String* name);
 };
 
-class ArrayType : public NS::Referencing<ArrayType, Type>
-{
+class ArrayType : public NS::Referencing<ArrayType, Type> {
 public:
-    static class ArrayType*     alloc();
+    static class ArrayType* alloc();
 
-    class ArrayType*            init();
+    class ArrayType* init();
 
-    MTL::DataType               elementType() const;
+    MTL::DataType elementType() const;
 
-    NS::UInteger                arrayLength() const;
+    NS::UInteger arrayLength() const;
 
-    NS::UInteger                stride() const;
+    NS::UInteger stride() const;
 
-    NS::UInteger                argumentIndexStride() const;
+    NS::UInteger argumentIndexStride() const;
 
-    class StructType*           elementStructType();
+    class StructType* elementStructType();
 
-    class ArrayType*            elementArrayType();
+    class ArrayType* elementArrayType();
 
     class TextureReferenceType* elementTextureReferenceType();
 
-    class PointerType*          elementPointerType();
+    class PointerType* elementPointerType();
 };
 
-class PointerType : public NS::Referencing<PointerType, Type>
-{
+class PointerType : public NS::Referencing<PointerType, Type> {
 public:
     static class PointerType* alloc();
 
-    class PointerType*        init();
+    class PointerType* init();
 
-    MTL::DataType             elementType() const;
+    MTL::DataType elementType() const;
 
-    MTL::ArgumentAccess       access() const;
+    MTL::ArgumentAccess access() const;
 
-    NS::UInteger              alignment() const;
+    NS::UInteger alignment() const;
 
-    NS::UInteger              dataSize() const;
+    NS::UInteger dataSize() const;
 
-    bool                      elementIsArgumentBuffer() const;
+    bool elementIsArgumentBuffer() const;
 
-    class StructType*         elementStructType();
+    class StructType* elementStructType();
 
-    class ArrayType*          elementArrayType();
+    class ArrayType* elementArrayType();
 };
 
-class TextureReferenceType : public NS::Referencing<TextureReferenceType, Type>
-{
+class TextureReferenceType : public NS::Referencing<TextureReferenceType, Type> {
 public:
     static class TextureReferenceType* alloc();
 
-    class TextureReferenceType*        init();
+    class TextureReferenceType* init();
 
-    MTL::DataType                      textureDataType() const;
+    MTL::DataType textureDataType() const;
 
-    MTL::TextureType                   textureType() const;
+    MTL::TextureType textureType() const;
 
-    MTL::ArgumentAccess                access() const;
+    MTL::ArgumentAccess access() const;
 
-    bool                               isDepthTexture() const;
+    bool isDepthTexture() const;
 };
 
-class Argument : public NS::Referencing<Argument>
-{
+class Argument : public NS::Referencing<Argument> {
 public:
     static class Argument* alloc();
 
-    class Argument*        init();
+    class Argument* init();
 
-    NS::String*            name() const;
+    NS::String* name() const;
 
-    MTL::ArgumentType      type() const;
+    MTL::ArgumentType type() const;
 
-    MTL::ArgumentAccess    access() const;
+    MTL::ArgumentAccess access() const;
 
-    NS::UInteger           index() const;
+    NS::UInteger index() const;
 
-    bool                   active() const;
+    bool active() const;
 
-    NS::UInteger           bufferAlignment() const;
+    NS::UInteger bufferAlignment() const;
 
-    NS::UInteger           bufferDataSize() const;
+    NS::UInteger bufferDataSize() const;
 
-    MTL::DataType          bufferDataType() const;
+    MTL::DataType bufferDataType() const;
 
-    class StructType*      bufferStructType() const;
+    class StructType* bufferStructType() const;
 
-    class PointerType*     bufferPointerType() const;
+    class PointerType* bufferPointerType() const;
 
-    NS::UInteger           threadgroupMemoryAlignment() const;
+    NS::UInteger threadgroupMemoryAlignment() const;
 
-    NS::UInteger           threadgroupMemoryDataSize() const;
+    NS::UInteger threadgroupMemoryDataSize() const;
 
-    MTL::TextureType       textureType() const;
+    MTL::TextureType textureType() const;
 
-    MTL::DataType          textureDataType() const;
+    MTL::DataType textureDataType() const;
 
-    bool                   isDepthTexture() const;
+    bool isDepthTexture() const;
 
-    NS::UInteger           arrayLength() const;
+    NS::UInteger arrayLength() const;
 };
 
-}
+} // namespace MTL
 
 // static method: alloc
 _MTL_INLINE MTL::Type* MTL::Type::alloc()
@@ -301,10 +293,7 @@ _MTL_INLINE MTL::Type* MTL::Type::alloc()
 }
 
 // method: init
-_MTL_INLINE MTL::Type* MTL::Type::init()
-{
-    return NS::Object::init<MTL::Type>();
-}
+_MTL_INLINE MTL::Type* MTL::Type::init() { return NS::Object::init<MTL::Type>(); }
 
 // property: dataType
 _MTL_INLINE MTL::DataType MTL::Type::dataType() const
@@ -357,7 +346,8 @@ _MTL_INLINE MTL::ArrayType* MTL::StructMember::arrayType()
 // method: textureReferenceType
 _MTL_INLINE MTL::TextureReferenceType* MTL::StructMember::textureReferenceType()
 {
-    return Object::sendMessage<MTL::TextureReferenceType*>(this, _MTL_PRIVATE_SEL(textureReferenceType));
+    return Object::sendMessage<MTL::TextureReferenceType*>(
+        this, _MTL_PRIVATE_SEL(textureReferenceType));
 }
 
 // method: pointerType
@@ -379,10 +369,7 @@ _MTL_INLINE MTL::StructType* MTL::StructType::alloc()
 }
 
 // method: init
-_MTL_INLINE MTL::StructType* MTL::StructType::init()
-{
-    return NS::Object::init<MTL::StructType>();
-}
+_MTL_INLINE MTL::StructType* MTL::StructType::init() { return NS::Object::init<MTL::StructType>(); }
 
 // property: members
 _MTL_INLINE NS::Array* MTL::StructType::members() const
@@ -403,10 +390,7 @@ _MTL_INLINE MTL::ArrayType* MTL::ArrayType::alloc()
 }
 
 // method: init
-_MTL_INLINE MTL::ArrayType* MTL::ArrayType::init()
-{
-    return NS::Object::init<MTL::ArrayType>();
-}
+_MTL_INLINE MTL::ArrayType* MTL::ArrayType::init() { return NS::Object::init<MTL::ArrayType>(); }
 
 // property: elementType
 _MTL_INLINE MTL::DataType MTL::ArrayType::elementType() const
@@ -447,7 +431,8 @@ _MTL_INLINE MTL::ArrayType* MTL::ArrayType::elementArrayType()
 // method: elementTextureReferenceType
 _MTL_INLINE MTL::TextureReferenceType* MTL::ArrayType::elementTextureReferenceType()
 {
-    return Object::sendMessage<MTL::TextureReferenceType*>(this, _MTL_PRIVATE_SEL(elementTextureReferenceType));
+    return Object::sendMessage<MTL::TextureReferenceType*>(
+        this, _MTL_PRIVATE_SEL(elementTextureReferenceType));
 }
 
 // method: elementPointerType
@@ -553,10 +538,7 @@ _MTL_INLINE MTL::Argument* MTL::Argument::alloc()
 }
 
 // method: init
-_MTL_INLINE MTL::Argument* MTL::Argument::init()
-{
-    return NS::Object::init<MTL::Argument>();
-}
+_MTL_INLINE MTL::Argument* MTL::Argument::init() { return NS::Object::init<MTL::Argument>(); }
 
 // property: name
 _MTL_INLINE NS::String* MTL::Argument::name() const

@@ -29,20 +29,19 @@
 #include "MTLDepthStencil.hpp"
 #include "MTLSampler.hpp"
 
-namespace MTL
-{
-_MTL_ENUM(NS::UInteger, SamplerMinMagFilter) {
+namespace MTL {
+_MTL_ENUM(NS::UInteger, SamplerMinMagFilter){
     SamplerMinMagFilterNearest = 0,
     SamplerMinMagFilterLinear = 1,
 };
 
-_MTL_ENUM(NS::UInteger, SamplerMipFilter) {
+_MTL_ENUM(NS::UInteger, SamplerMipFilter){
     SamplerMipFilterNotMipmapped = 0,
     SamplerMipFilterNearest = 1,
     SamplerMipFilterLinear = 2,
 };
 
-_MTL_ENUM(NS::UInteger, SamplerAddressMode) {
+_MTL_ENUM(NS::UInteger, SamplerAddressMode){
     SamplerAddressModeClampToEdge = 0,
     SamplerAddressModeMirrorClampToEdge = 1,
     SamplerAddressModeRepeat = 2,
@@ -51,74 +50,72 @@ _MTL_ENUM(NS::UInteger, SamplerAddressMode) {
     SamplerAddressModeClampToBorderColor = 5,
 };
 
-_MTL_ENUM(NS::UInteger, SamplerBorderColor) {
+_MTL_ENUM(NS::UInteger, SamplerBorderColor){
     SamplerBorderColorTransparentBlack = 0,
     SamplerBorderColorOpaqueBlack = 1,
     SamplerBorderColorOpaqueWhite = 2,
 };
 
-class SamplerDescriptor : public NS::Copying<SamplerDescriptor>
-{
+class SamplerDescriptor : public NS::Copying<SamplerDescriptor> {
 public:
     static class SamplerDescriptor* alloc();
 
-    class SamplerDescriptor*        init();
+    class SamplerDescriptor* init();
 
-    MTL::SamplerMinMagFilter        minFilter() const;
-    void                            setMinFilter(MTL::SamplerMinMagFilter minFilter);
+    MTL::SamplerMinMagFilter minFilter() const;
+    void setMinFilter(MTL::SamplerMinMagFilter minFilter);
 
-    MTL::SamplerMinMagFilter        magFilter() const;
-    void                            setMagFilter(MTL::SamplerMinMagFilter magFilter);
+    MTL::SamplerMinMagFilter magFilter() const;
+    void setMagFilter(MTL::SamplerMinMagFilter magFilter);
 
-    MTL::SamplerMipFilter           mipFilter() const;
-    void                            setMipFilter(MTL::SamplerMipFilter mipFilter);
+    MTL::SamplerMipFilter mipFilter() const;
+    void setMipFilter(MTL::SamplerMipFilter mipFilter);
 
-    NS::UInteger                    maxAnisotropy() const;
-    void                            setMaxAnisotropy(NS::UInteger maxAnisotropy);
+    NS::UInteger maxAnisotropy() const;
+    void setMaxAnisotropy(NS::UInteger maxAnisotropy);
 
-    MTL::SamplerAddressMode         sAddressMode() const;
-    void                            setSAddressMode(MTL::SamplerAddressMode sAddressMode);
+    MTL::SamplerAddressMode sAddressMode() const;
+    void setSAddressMode(MTL::SamplerAddressMode sAddressMode);
 
-    MTL::SamplerAddressMode         tAddressMode() const;
-    void                            setTAddressMode(MTL::SamplerAddressMode tAddressMode);
+    MTL::SamplerAddressMode tAddressMode() const;
+    void setTAddressMode(MTL::SamplerAddressMode tAddressMode);
 
-    MTL::SamplerAddressMode         rAddressMode() const;
-    void                            setRAddressMode(MTL::SamplerAddressMode rAddressMode);
+    MTL::SamplerAddressMode rAddressMode() const;
+    void setRAddressMode(MTL::SamplerAddressMode rAddressMode);
 
-    MTL::SamplerBorderColor         borderColor() const;
-    void                            setBorderColor(MTL::SamplerBorderColor borderColor);
+    MTL::SamplerBorderColor borderColor() const;
+    void setBorderColor(MTL::SamplerBorderColor borderColor);
 
-    bool                            normalizedCoordinates() const;
-    void                            setNormalizedCoordinates(bool normalizedCoordinates);
+    bool normalizedCoordinates() const;
+    void setNormalizedCoordinates(bool normalizedCoordinates);
 
-    float                           lodMinClamp() const;
-    void                            setLodMinClamp(float lodMinClamp);
+    float lodMinClamp() const;
+    void setLodMinClamp(float lodMinClamp);
 
-    float                           lodMaxClamp() const;
-    void                            setLodMaxClamp(float lodMaxClamp);
+    float lodMaxClamp() const;
+    void setLodMaxClamp(float lodMaxClamp);
 
-    bool                            lodAverage() const;
-    void                            setLodAverage(bool lodAverage);
+    bool lodAverage() const;
+    void setLodAverage(bool lodAverage);
 
-    MTL::CompareFunction            compareFunction() const;
-    void                            setCompareFunction(MTL::CompareFunction compareFunction);
+    MTL::CompareFunction compareFunction() const;
+    void setCompareFunction(MTL::CompareFunction compareFunction);
 
-    bool                            supportArgumentBuffers() const;
-    void                            setSupportArgumentBuffers(bool supportArgumentBuffers);
+    bool supportArgumentBuffers() const;
+    void setSupportArgumentBuffers(bool supportArgumentBuffers);
 
-    NS::String*                     label() const;
-    void                            setLabel(const NS::String* label);
+    NS::String* label() const;
+    void setLabel(const NS::String* label);
 };
 
-class SamplerState : public NS::Referencing<SamplerState>
-{
+class SamplerState : public NS::Referencing<SamplerState> {
 public:
-    NS::String*   label() const;
+    NS::String* label() const;
 
     class Device* device() const;
 };
 
-}
+} // namespace MTL
 
 // static method: alloc
 _MTL_INLINE MTL::SamplerDescriptor* MTL::SamplerDescriptor::alloc()
@@ -228,7 +225,8 @@ _MTL_INLINE bool MTL::SamplerDescriptor::normalizedCoordinates() const
 
 _MTL_INLINE void MTL::SamplerDescriptor::setNormalizedCoordinates(bool normalizedCoordinates)
 {
-    Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(setNormalizedCoordinates_), normalizedCoordinates);
+    Object::sendMessage<void>(
+        this, _MTL_PRIVATE_SEL(setNormalizedCoordinates_), normalizedCoordinates);
 }
 
 // property: lodMinClamp
@@ -283,7 +281,8 @@ _MTL_INLINE bool MTL::SamplerDescriptor::supportArgumentBuffers() const
 
 _MTL_INLINE void MTL::SamplerDescriptor::setSupportArgumentBuffers(bool supportArgumentBuffers)
 {
-    Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(setSupportArgumentBuffers_), supportArgumentBuffers);
+    Object::sendMessage<void>(
+        this, _MTL_PRIVATE_SEL(setSupportArgumentBuffers_), supportArgumentBuffers);
 }
 
 // property: label

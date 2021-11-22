@@ -33,32 +33,28 @@
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace NS
-{
+namespace NS {
 template <class _Class, class _Base = class Object>
-class Referencing : public _Base
-{
+class Referencing : public _Base {
 public:
-    _Class*  retain();
-    void     release();
+    _Class* retain();
+    void release();
 
-    _Class*  autorelease();
+    _Class* autorelease();
 
     UInteger retainCount() const;
 };
 
 template <class _Class, class _Base = class Object>
-class Copying : public Referencing<_Class, _Base>
-{
+class Copying : public Referencing<_Class, _Base> {
 public:
     _Class* copy() const;
 };
 
-class Object : public Referencing<Object, objc_object>
-{
+class Object : public Referencing<Object, objc_object> {
 public:
-    UInteger      hash() const;
-    bool          isEqual(const Object* pObject) const;
+    UInteger hash() const;
+    bool isEqual(const Object* pObject) const;
 
     class String* description() const;
     class String* debugDescription() const;
@@ -74,9 +70,9 @@ protected:
     _Class* init();
 
     template <class _Dst>
-    static _Dst                   bridgingCast(const void* pObj);
+    static _Dst bridgingCast(const void* pObj);
     static class MethodSignature* methodSignatureForSelector(const void* pObj, SEL selector);
-    static bool                   respondsToSelector(const void* pObj, SEL selector);
+    static bool respondsToSelector(const void* pObj, SEL selector);
     template <typename _Type>
     static constexpr bool doesRequireMsgSendStret();
     template <typename _Ret, typename... _Args>
@@ -91,7 +87,7 @@ private:
 
     Object& operator=(const Object&) = delete;
 };
-}
+} // namespace NS
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -179,29 +175,27 @@ template <typename _Ret, typename... _Args>
 _NS_INLINE _Ret NS::Object::sendMessage(const void* pObj, SEL selector, _Args... args)
 {
 #if (defined(__i386__) || defined(__x86_64__))
-    if constexpr (std::is_floating_point<_Ret>())
-    {
+    if constexpr (std::is_floating_point<_Ret>()) {
         using SendMessageProcFpret = _Ret (*)(const void*, SEL, _Args...);
 
-        const SendMessageProcFpret pProc = reinterpret_cast<SendMessageProcFpret>(&objc_msgSend_fpret);
+        const SendMessageProcFpret pProc =
+            reinterpret_cast<SendMessageProcFpret>(&objc_msgSend_fpret);
 
         return (*pProc)(pObj, selector, args...);
-    }
-    else
+    } else
 #endif // ( defined( __i386__ )  || defined( __x86_64__ )  )
 #if !defined(__arm64__)
-        if constexpr (doesRequireMsgSendStret<_Ret>())
-    {
+        if constexpr (doesRequireMsgSendStret<_Ret>()) {
         using SendMessageProcStret = void (*)(_Ret*, const void*, SEL, _Args...);
 
-        const SendMessageProcStret pProc = reinterpret_cast<SendMessageProcStret>(&objc_msgSend_stret);
-        _Ret                       ret;
+        const SendMessageProcStret pProc =
+            reinterpret_cast<SendMessageProcStret>(&objc_msgSend_stret);
+        _Ret ret;
 
         (*pProc)(&ret, pObj, selector, args...);
 
         return ret;
-    }
-    else
+    } else
 #endif // !defined( __arm64__ )
     {
         using SendMessageProc = _Ret (*)(const void*, SEL, _Args...);
@@ -214,9 +208,11 @@ _NS_INLINE _Ret NS::Object::sendMessage(const void* pObj, SEL selector, _Args...
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-_NS_INLINE NS::MethodSignature* NS::Object::methodSignatureForSelector(const void* pObj, SEL selector)
+_NS_INLINE NS::MethodSignature* NS::Object::methodSignatureForSelector(
+    const void* pObj, SEL selector)
 {
-    return sendMessage<MethodSignature*>(pObj, _NS_PRIVATE_SEL(methodSignatureForSelector_), selector);
+    return sendMessage<MethodSignature*>(
+        pObj, _NS_PRIVATE_SEL(methodSignatureForSelector_), selector);
 }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -231,13 +227,12 @@ _NS_INLINE bool NS::Object::respondsToSelector(const void* pObj, SEL selector)
 template <typename _Ret, typename... _Args>
 _NS_INLINE _Ret NS::Object::sendMessageSafe(const void* pObj, SEL selector, _Args... args)
 {
-    if ((respondsToSelector(pObj, selector)) || (nullptr != methodSignatureForSelector(pObj, selector)))
-    {
+    if ((respondsToSelector(pObj, selector)) ||
+        (nullptr != methodSignatureForSelector(pObj, selector))) {
         return sendMessage<_Ret>(pObj, selector, args...);
     }
 
-    if constexpr (!std::is_void<_Ret>::value)
-    {
+    if constexpr (!std::is_void<_Ret>::value) {
         return 0;
     }
 }

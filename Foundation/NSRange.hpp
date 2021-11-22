@@ -27,37 +27,28 @@
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace NS
-{
-struct Range
-{
+namespace NS {
+struct Range {
     static Range Make(UInteger loc, UInteger len);
 
     Range(UInteger loc, UInteger len);
 
-    bool     Equal(const Range& range) const;
-    bool     LocationInRange(UInteger loc) const;
+    bool Equal(const Range& range) const;
+    bool LocationInRange(UInteger loc) const;
     UInteger Max() const;
 
     UInteger location;
     UInteger length;
 } _NS_PACKED;
-}
+} // namespace NS
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-_NS_INLINE NS::Range::Range(UInteger loc, UInteger len)
-    : location(loc)
-    , length(len)
-{
-}
+_NS_INLINE NS::Range::Range(UInteger loc, UInteger len) : location(loc), length(len) {}
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-_NS_INLINE NS::Range NS::Range::Make(UInteger loc, UInteger len)
-{
-    return Range(loc, len);
-}
+_NS_INLINE NS::Range NS::Range::Make(UInteger loc, UInteger len) { return Range(loc, len); }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -75,9 +66,6 @@ _NS_INLINE bool NS::Range::LocationInRange(UInteger loc) const
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-_NS_INLINE NS::UInteger NS::Range::Max() const
-{
-    return location + length;
-}
+_NS_INLINE NS::UInteger NS::Range::Max() const { return location + length; }
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------

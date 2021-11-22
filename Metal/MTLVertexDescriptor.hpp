@@ -28,9 +28,8 @@
 
 #include "MTLVertexDescriptor.hpp"
 
-namespace MTL
-{
-_MTL_ENUM(NS::UInteger, VertexFormat) {
+namespace MTL {
+_MTL_ENUM(NS::UInteger, VertexFormat){
     VertexFormatInvalid = 0,
     VertexFormatUChar2 = 1,
     VertexFormatUChar3 = 2,
@@ -85,7 +84,7 @@ _MTL_ENUM(NS::UInteger, VertexFormat) {
     VertexFormatHalf = 53,
 };
 
-_MTL_ENUM(NS::UInteger, VertexStepFunction) {
+_MTL_ENUM(NS::UInteger, VertexStepFunction){
     VertexStepFunctionConstant = 0,
     VertexStepFunctionPerVertex = 1,
     VertexStepFunctionPerInstance = 2,
@@ -93,86 +92,83 @@ _MTL_ENUM(NS::UInteger, VertexStepFunction) {
     VertexStepFunctionPerPatchControlPoint = 4,
 };
 
-class VertexBufferLayoutDescriptor : public NS::Copying<VertexBufferLayoutDescriptor>
-{
+class VertexBufferLayoutDescriptor : public NS::Copying<VertexBufferLayoutDescriptor> {
 public:
     static class VertexBufferLayoutDescriptor* alloc();
 
-    class VertexBufferLayoutDescriptor*        init();
+    class VertexBufferLayoutDescriptor* init();
 
-    NS::UInteger                               stride() const;
-    void                                       setStride(NS::UInteger stride);
+    NS::UInteger stride() const;
+    void setStride(NS::UInteger stride);
 
-    MTL::VertexStepFunction                    stepFunction() const;
-    void                                       setStepFunction(MTL::VertexStepFunction stepFunction);
+    MTL::VertexStepFunction stepFunction() const;
+    void setStepFunction(MTL::VertexStepFunction stepFunction);
 
-    NS::UInteger                               stepRate() const;
-    void                                       setStepRate(NS::UInteger stepRate);
+    NS::UInteger stepRate() const;
+    void setStepRate(NS::UInteger stepRate);
 };
 
-class VertexBufferLayoutDescriptorArray : public NS::Referencing<VertexBufferLayoutDescriptorArray>
-{
+class VertexBufferLayoutDescriptorArray
+    : public NS::Referencing<VertexBufferLayoutDescriptorArray> {
 public:
     static class VertexBufferLayoutDescriptorArray* alloc();
 
-    class VertexBufferLayoutDescriptorArray*        init();
+    class VertexBufferLayoutDescriptorArray* init();
 
-    class VertexBufferLayoutDescriptor*             object(NS::UInteger index);
+    class VertexBufferLayoutDescriptor* object(NS::UInteger index);
 
-    void                                            setObject(const class VertexBufferLayoutDescriptor* bufferDesc, NS::UInteger index);
+    void setObject(const class VertexBufferLayoutDescriptor* bufferDesc, NS::UInteger index);
 };
 
-class VertexAttributeDescriptor : public NS::Copying<VertexAttributeDescriptor>
-{
+class VertexAttributeDescriptor : public NS::Copying<VertexAttributeDescriptor> {
 public:
     static class VertexAttributeDescriptor* alloc();
 
-    class VertexAttributeDescriptor*        init();
+    class VertexAttributeDescriptor* init();
 
-    MTL::VertexFormat                       format() const;
-    void                                    setFormat(MTL::VertexFormat format);
+    MTL::VertexFormat format() const;
+    void setFormat(MTL::VertexFormat format);
 
-    NS::UInteger                            offset() const;
-    void                                    setOffset(NS::UInteger offset);
+    NS::UInteger offset() const;
+    void setOffset(NS::UInteger offset);
 
-    NS::UInteger                            bufferIndex() const;
-    void                                    setBufferIndex(NS::UInteger bufferIndex);
+    NS::UInteger bufferIndex() const;
+    void setBufferIndex(NS::UInteger bufferIndex);
 };
 
-class VertexAttributeDescriptorArray : public NS::Referencing<VertexAttributeDescriptorArray>
-{
+class VertexAttributeDescriptorArray : public NS::Referencing<VertexAttributeDescriptorArray> {
 public:
     static class VertexAttributeDescriptorArray* alloc();
 
-    class VertexAttributeDescriptorArray*        init();
+    class VertexAttributeDescriptorArray* init();
 
-    class VertexAttributeDescriptor*             object(NS::UInteger index);
+    class VertexAttributeDescriptor* object(NS::UInteger index);
 
-    void                                         setObject(const class VertexAttributeDescriptor* attributeDesc, NS::UInteger index);
+    void setObject(const class VertexAttributeDescriptor* attributeDesc, NS::UInteger index);
 };
 
-class VertexDescriptor : public NS::Copying<VertexDescriptor>
-{
+class VertexDescriptor : public NS::Copying<VertexDescriptor> {
 public:
-    static class VertexDescriptor*           alloc();
+    static class VertexDescriptor* alloc();
 
-    class VertexDescriptor*                  init();
+    class VertexDescriptor* init();
 
-    static class VertexDescriptor*           vertexDescriptor();
+    static class VertexDescriptor* vertexDescriptor();
 
     class VertexBufferLayoutDescriptorArray* layouts() const;
 
-    class VertexAttributeDescriptorArray*    attributes() const;
+    class VertexAttributeDescriptorArray* attributes() const;
 
-    void                                     reset();
+    void reset();
 };
 
-}
+} // namespace MTL
 
 // static method: alloc
 _MTL_INLINE MTL::VertexBufferLayoutDescriptor* MTL::VertexBufferLayoutDescriptor::alloc()
 {
-    return NS::Object::alloc<MTL::VertexBufferLayoutDescriptor>(_MTL_PRIVATE_CLS(MTLVertexBufferLayoutDescriptor));
+    return NS::Object::alloc<MTL::VertexBufferLayoutDescriptor>(
+        _MTL_PRIVATE_CLS(MTLVertexBufferLayoutDescriptor));
 }
 
 // method: init
@@ -198,7 +194,8 @@ _MTL_INLINE MTL::VertexStepFunction MTL::VertexBufferLayoutDescriptor::stepFunct
     return Object::sendMessage<MTL::VertexStepFunction>(this, _MTL_PRIVATE_SEL(stepFunction));
 }
 
-_MTL_INLINE void MTL::VertexBufferLayoutDescriptor::setStepFunction(MTL::VertexStepFunction stepFunction)
+_MTL_INLINE void MTL::VertexBufferLayoutDescriptor::setStepFunction(
+    MTL::VertexStepFunction stepFunction)
 {
     Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(setStepFunction_), stepFunction);
 }
@@ -217,7 +214,8 @@ _MTL_INLINE void MTL::VertexBufferLayoutDescriptor::setStepRate(NS::UInteger ste
 // static method: alloc
 _MTL_INLINE MTL::VertexBufferLayoutDescriptorArray* MTL::VertexBufferLayoutDescriptorArray::alloc()
 {
-    return NS::Object::alloc<MTL::VertexBufferLayoutDescriptorArray>(_MTL_PRIVATE_CLS(MTLVertexBufferLayoutDescriptorArray));
+    return NS::Object::alloc<MTL::VertexBufferLayoutDescriptorArray>(
+        _MTL_PRIVATE_CLS(MTLVertexBufferLayoutDescriptorArray));
 }
 
 // method: init
@@ -227,21 +225,26 @@ _MTL_INLINE MTL::VertexBufferLayoutDescriptorArray* MTL::VertexBufferLayoutDescr
 }
 
 // method: objectAtIndexedSubscript:
-_MTL_INLINE MTL::VertexBufferLayoutDescriptor* MTL::VertexBufferLayoutDescriptorArray::object(NS::UInteger index)
+_MTL_INLINE MTL::VertexBufferLayoutDescriptor* MTL::VertexBufferLayoutDescriptorArray::object(
+    NS::UInteger index)
 {
-    return Object::sendMessage<MTL::VertexBufferLayoutDescriptor*>(this, _MTL_PRIVATE_SEL(objectAtIndexedSubscript_), index);
+    return Object::sendMessage<MTL::VertexBufferLayoutDescriptor*>(
+        this, _MTL_PRIVATE_SEL(objectAtIndexedSubscript_), index);
 }
 
 // method: setObject:atIndexedSubscript:
-_MTL_INLINE void MTL::VertexBufferLayoutDescriptorArray::setObject(const MTL::VertexBufferLayoutDescriptor* bufferDesc, NS::UInteger index)
+_MTL_INLINE void MTL::VertexBufferLayoutDescriptorArray::setObject(
+    const MTL::VertexBufferLayoutDescriptor* bufferDesc, NS::UInteger index)
 {
-    Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(setObject_atIndexedSubscript_), bufferDesc, index);
+    Object::sendMessage<void>(
+        this, _MTL_PRIVATE_SEL(setObject_atIndexedSubscript_), bufferDesc, index);
 }
 
 // static method: alloc
 _MTL_INLINE MTL::VertexAttributeDescriptor* MTL::VertexAttributeDescriptor::alloc()
 {
-    return NS::Object::alloc<MTL::VertexAttributeDescriptor>(_MTL_PRIVATE_CLS(MTLVertexAttributeDescriptor));
+    return NS::Object::alloc<MTL::VertexAttributeDescriptor>(
+        _MTL_PRIVATE_CLS(MTLVertexAttributeDescriptor));
 }
 
 // method: init
@@ -286,7 +289,8 @@ _MTL_INLINE void MTL::VertexAttributeDescriptor::setBufferIndex(NS::UInteger buf
 // static method: alloc
 _MTL_INLINE MTL::VertexAttributeDescriptorArray* MTL::VertexAttributeDescriptorArray::alloc()
 {
-    return NS::Object::alloc<MTL::VertexAttributeDescriptorArray>(_MTL_PRIVATE_CLS(MTLVertexAttributeDescriptorArray));
+    return NS::Object::alloc<MTL::VertexAttributeDescriptorArray>(
+        _MTL_PRIVATE_CLS(MTLVertexAttributeDescriptorArray));
 }
 
 // method: init
@@ -296,15 +300,19 @@ _MTL_INLINE MTL::VertexAttributeDescriptorArray* MTL::VertexAttributeDescriptorA
 }
 
 // method: objectAtIndexedSubscript:
-_MTL_INLINE MTL::VertexAttributeDescriptor* MTL::VertexAttributeDescriptorArray::object(NS::UInteger index)
+_MTL_INLINE MTL::VertexAttributeDescriptor* MTL::VertexAttributeDescriptorArray::object(
+    NS::UInteger index)
 {
-    return Object::sendMessage<MTL::VertexAttributeDescriptor*>(this, _MTL_PRIVATE_SEL(objectAtIndexedSubscript_), index);
+    return Object::sendMessage<MTL::VertexAttributeDescriptor*>(
+        this, _MTL_PRIVATE_SEL(objectAtIndexedSubscript_), index);
 }
 
 // method: setObject:atIndexedSubscript:
-_MTL_INLINE void MTL::VertexAttributeDescriptorArray::setObject(const MTL::VertexAttributeDescriptor* attributeDesc, NS::UInteger index)
+_MTL_INLINE void MTL::VertexAttributeDescriptorArray::setObject(
+    const MTL::VertexAttributeDescriptor* attributeDesc, NS::UInteger index)
 {
-    Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(setObject_atIndexedSubscript_), attributeDesc, index);
+    Object::sendMessage<void>(
+        this, _MTL_PRIVATE_SEL(setObject_atIndexedSubscript_), attributeDesc, index);
 }
 
 // static method: alloc
@@ -322,19 +330,22 @@ _MTL_INLINE MTL::VertexDescriptor* MTL::VertexDescriptor::init()
 // static method: vertexDescriptor
 _MTL_INLINE MTL::VertexDescriptor* MTL::VertexDescriptor::vertexDescriptor()
 {
-    return Object::sendMessage<MTL::VertexDescriptor*>(_MTL_PRIVATE_CLS(MTLVertexDescriptor), _MTL_PRIVATE_SEL(vertexDescriptor));
+    return Object::sendMessage<MTL::VertexDescriptor*>(
+        _MTL_PRIVATE_CLS(MTLVertexDescriptor), _MTL_PRIVATE_SEL(vertexDescriptor));
 }
 
 // property: layouts
 _MTL_INLINE MTL::VertexBufferLayoutDescriptorArray* MTL::VertexDescriptor::layouts() const
 {
-    return Object::sendMessage<MTL::VertexBufferLayoutDescriptorArray*>(this, _MTL_PRIVATE_SEL(layouts));
+    return Object::sendMessage<MTL::VertexBufferLayoutDescriptorArray*>(
+        this, _MTL_PRIVATE_SEL(layouts));
 }
 
 // property: attributes
 _MTL_INLINE MTL::VertexAttributeDescriptorArray* MTL::VertexDescriptor::attributes() const
 {
-    return Object::sendMessage<MTL::VertexAttributeDescriptorArray*>(this, _MTL_PRIVATE_SEL(attributes));
+    return Object::sendMessage<MTL::VertexAttributeDescriptorArray*>(
+        this, _MTL_PRIVATE_SEL(attributes));
 }
 
 // method: reset

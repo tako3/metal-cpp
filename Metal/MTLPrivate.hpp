@@ -44,41 +44,45 @@
 #define _MTL_PRIVATE_OBJC_LOOKUP_CLASS(symbol) objc_lookUpClass(#symbol)
 #endif // __OBJC__
 
-#define _MTL_PRIVATE_DEF_CLS(symbol) void* s_k##symbol _MTL_PRIVATE_VISIBILITY = _MTL_PRIVATE_OBJC_LOOKUP_CLASS(symbol);
+#define _MTL_PRIVATE_DEF_CLS(symbol)                                                               \
+    void* s_k##symbol _MTL_PRIVATE_VISIBILITY = _MTL_PRIVATE_OBJC_LOOKUP_CLASS(symbol);
 #define _MTL_PRIVATE_DEF_PRO(symbol)
-#define _MTL_PRIVATE_DEF_SEL(accessor, symbol) SEL s_k##accessor _MTL_PRIVATE_VISIBILITY = sel_registerName(symbol);
+#define _MTL_PRIVATE_DEF_SEL(accessor, symbol)                                                     \
+    SEL s_k##accessor _MTL_PRIVATE_VISIBILITY = sel_registerName(symbol);
 
-#if defined(__MAC_10_16) || defined(__MAC_11_0) || defined(__MAC_12_0) || defined(__IPHONE_14_0) || defined(__IPHONE_15_0) || defined(__TVOS_14_0) || defined(__TVOS_15_0)
+#if defined(__MAC_10_16) || defined(__MAC_11_0) || defined(__MAC_12_0) ||                          \
+    defined(__IPHONE_14_0) || defined(__IPHONE_15_0) || defined(__TVOS_14_0) ||                    \
+    defined(__TVOS_15_0)
 
-#define _MTL_PRIVATE_DEF_STR(type, symbol)                  \
-    _MTL_EXTERN type const MTL##symbol _MTL_PRIVATE_IMPORT; \
-    type const                         MTL::symbol = (nullptr != &MTL##symbol) ? MTL##symbol : nullptr;
+#define _MTL_PRIVATE_DEF_STR(type, symbol)                                                         \
+    _MTL_EXTERN type const MTL##symbol _MTL_PRIVATE_IMPORT;                                        \
+    type const MTL::symbol = (nullptr != &MTL##symbol) ? MTL##symbol : nullptr;
 
 #else
 
 #include <dlfcn.h>
 
-namespace MTL
+namespace MTL {
+namespace Private {
+
+template <typename _Type>
+inline _Type const LoadSymbol(const char* pSymbol)
 {
-namespace Private
-{
+    const _Type* pAddress = static_cast<_Type*>(dlsym(RTLD_DEFAULT, pSymbol));
 
-    template <typename _Type>
-    inline _Type const LoadSymbol(const char* pSymbol)
-    {
-        const _Type* pAddress = static_cast<_Type*>(dlsym(RTLD_DEFAULT, pSymbol));
+    return pAddress ? *pAddress : nullptr;
+}
 
-        return pAddress ? *pAddress : nullptr;
-    }
+} // namespace Private
+} // namespace MTL
 
-} // Private
-} // MTL
+#define _MTL_PRIVATE_DEF_STR(type, symbol)                                                         \
+    _MTL_EXTERN type const MTL##symbol;                                                            \
+    type const MTL::symbol = Private::LoadSymbol<type>("MTL" #symbol);
 
-#define _MTL_PRIVATE_DEF_STR(type, symbol) \
-    _MTL_EXTERN type const MTL##symbol;    \
-    type const             MTL::symbol = Private::LoadSymbol<type>("MTL" #symbol);
-
-#endif // defined(__MAC_10_16) || defined(__MAC_11_0) || defined(__MAC_12_0) || defined(__IPHONE_14_0) || defined(__IPHONE_15_0) || defined(__TVOS_14_0) || defined(__TVOS_15_0)
+#endif // defined(__MAC_10_16) || defined(__MAC_11_0) || defined(__MAC_12_0) ||
+       // defined(__IPHONE_14_0) || defined(__IPHONE_15_0) || defined(__TVOS_14_0) ||
+       // defined(__TVOS_15_0)
 
 #else
 
@@ -91,45 +95,34 @@ namespace Private
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace MTL
-{
-namespace Private
-{
-    namespace Class
-    {
+namespace MTL {
+namespace Private {
+namespace Class {
 
-    } // Class
-} // Private
-} // MTL
+} // namespace Class
+} // namespace Private
+} // namespace MTL
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace MTL
-{
-namespace Private
-{
-    namespace Protocol
-    {
+namespace MTL {
+namespace Private {
+namespace Protocol {
 
-    } // Protocol
-} // Private
-} // MTL
+} // namespace Protocol
+} // namespace Private
+} // namespace MTL
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-namespace MTL
-{
-namespace Private
-{
-    namespace Selector
-    {
+namespace MTL {
+namespace Private {
+namespace Selector {
 
-        _MTL_PRIVATE_DEF_SEL(beginScope,
-            "beginScope");
-        _MTL_PRIVATE_DEF_SEL(endScope,
-            "endScope");
-    } // Class
-} // Private
-} // MTL
+_MTL_PRIVATE_DEF_SEL(beginScope, "beginScope");
+_MTL_PRIVATE_DEF_SEL(endScope, "endScope");
+} // namespace Selector
+} // namespace Private
+} // namespace MTL
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------

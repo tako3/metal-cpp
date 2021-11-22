@@ -28,9 +28,8 @@
 
 #include "MTLStageInputOutputDescriptor.hpp"
 
-namespace MTL
-{
-_MTL_ENUM(NS::UInteger, AttributeFormat) {
+namespace MTL {
+_MTL_ENUM(NS::UInteger, AttributeFormat){
     AttributeFormatInvalid = 0,
     AttributeFormatUChar2 = 1,
     AttributeFormatUChar3 = 2,
@@ -85,12 +84,12 @@ _MTL_ENUM(NS::UInteger, AttributeFormat) {
     AttributeFormatHalf = 53,
 };
 
-_MTL_ENUM(NS::UInteger, IndexType) {
+_MTL_ENUM(NS::UInteger, IndexType){
     IndexTypeUInt16 = 0,
     IndexTypeUInt32 = 1,
 };
 
-_MTL_ENUM(NS::UInteger, StepFunction) {
+_MTL_ENUM(NS::UInteger, StepFunction){
     StepFunctionConstant = 0,
     StepFunctionPerVertex = 1,
     StepFunctionPerInstance = 2,
@@ -102,92 +101,88 @@ _MTL_ENUM(NS::UInteger, StepFunction) {
     StepFunctionThreadPositionInGridYIndexed = 8,
 };
 
-class BufferLayoutDescriptor : public NS::Copying<BufferLayoutDescriptor>
-{
+class BufferLayoutDescriptor : public NS::Copying<BufferLayoutDescriptor> {
 public:
     static class BufferLayoutDescriptor* alloc();
 
-    class BufferLayoutDescriptor*        init();
+    class BufferLayoutDescriptor* init();
 
-    NS::UInteger                         stride() const;
-    void                                 setStride(NS::UInteger stride);
+    NS::UInteger stride() const;
+    void setStride(NS::UInteger stride);
 
-    MTL::StepFunction                    stepFunction() const;
-    void                                 setStepFunction(MTL::StepFunction stepFunction);
+    MTL::StepFunction stepFunction() const;
+    void setStepFunction(MTL::StepFunction stepFunction);
 
-    NS::UInteger                         stepRate() const;
-    void                                 setStepRate(NS::UInteger stepRate);
+    NS::UInteger stepRate() const;
+    void setStepRate(NS::UInteger stepRate);
 };
 
-class BufferLayoutDescriptorArray : public NS::Referencing<BufferLayoutDescriptorArray>
-{
+class BufferLayoutDescriptorArray : public NS::Referencing<BufferLayoutDescriptorArray> {
 public:
     static class BufferLayoutDescriptorArray* alloc();
 
-    class BufferLayoutDescriptorArray*        init();
+    class BufferLayoutDescriptorArray* init();
 
-    class BufferLayoutDescriptor*             object(NS::UInteger index);
+    class BufferLayoutDescriptor* object(NS::UInteger index);
 
-    void                                      setObject(const class BufferLayoutDescriptor* bufferDesc, NS::UInteger index);
+    void setObject(const class BufferLayoutDescriptor* bufferDesc, NS::UInteger index);
 };
 
-class AttributeDescriptor : public NS::Copying<AttributeDescriptor>
-{
+class AttributeDescriptor : public NS::Copying<AttributeDescriptor> {
 public:
     static class AttributeDescriptor* alloc();
 
-    class AttributeDescriptor*        init();
+    class AttributeDescriptor* init();
 
-    MTL::AttributeFormat              format() const;
-    void                              setFormat(MTL::AttributeFormat format);
+    MTL::AttributeFormat format() const;
+    void setFormat(MTL::AttributeFormat format);
 
-    NS::UInteger                      offset() const;
-    void                              setOffset(NS::UInteger offset);
+    NS::UInteger offset() const;
+    void setOffset(NS::UInteger offset);
 
-    NS::UInteger                      bufferIndex() const;
-    void                              setBufferIndex(NS::UInteger bufferIndex);
+    NS::UInteger bufferIndex() const;
+    void setBufferIndex(NS::UInteger bufferIndex);
 };
 
-class AttributeDescriptorArray : public NS::Referencing<AttributeDescriptorArray>
-{
+class AttributeDescriptorArray : public NS::Referencing<AttributeDescriptorArray> {
 public:
     static class AttributeDescriptorArray* alloc();
 
-    class AttributeDescriptorArray*        init();
+    class AttributeDescriptorArray* init();
 
-    class AttributeDescriptor*             object(NS::UInteger index);
+    class AttributeDescriptor* object(NS::UInteger index);
 
-    void                                   setObject(const class AttributeDescriptor* attributeDesc, NS::UInteger index);
+    void setObject(const class AttributeDescriptor* attributeDesc, NS::UInteger index);
 };
 
-class StageInputOutputDescriptor : public NS::Copying<StageInputOutputDescriptor>
-{
+class StageInputOutputDescriptor : public NS::Copying<StageInputOutputDescriptor> {
 public:
     static class StageInputOutputDescriptor* alloc();
 
-    class StageInputOutputDescriptor*        init();
+    class StageInputOutputDescriptor* init();
 
     static class StageInputOutputDescriptor* stageInputOutputDescriptor();
 
-    class BufferLayoutDescriptorArray*       layouts() const;
+    class BufferLayoutDescriptorArray* layouts() const;
 
-    class AttributeDescriptorArray*          attributes() const;
+    class AttributeDescriptorArray* attributes() const;
 
-    MTL::IndexType                           indexType() const;
-    void                                     setIndexType(MTL::IndexType indexType);
+    MTL::IndexType indexType() const;
+    void setIndexType(MTL::IndexType indexType);
 
-    NS::UInteger                             indexBufferIndex() const;
-    void                                     setIndexBufferIndex(NS::UInteger indexBufferIndex);
+    NS::UInteger indexBufferIndex() const;
+    void setIndexBufferIndex(NS::UInteger indexBufferIndex);
 
-    void                                     reset();
+    void reset();
 };
 
-}
+} // namespace MTL
 
 // static method: alloc
 _MTL_INLINE MTL::BufferLayoutDescriptor* MTL::BufferLayoutDescriptor::alloc()
 {
-    return NS::Object::alloc<MTL::BufferLayoutDescriptor>(_MTL_PRIVATE_CLS(MTLBufferLayoutDescriptor));
+    return NS::Object::alloc<MTL::BufferLayoutDescriptor>(
+        _MTL_PRIVATE_CLS(MTLBufferLayoutDescriptor));
 }
 
 // method: init
@@ -232,7 +227,8 @@ _MTL_INLINE void MTL::BufferLayoutDescriptor::setStepRate(NS::UInteger stepRate)
 // static method: alloc
 _MTL_INLINE MTL::BufferLayoutDescriptorArray* MTL::BufferLayoutDescriptorArray::alloc()
 {
-    return NS::Object::alloc<MTL::BufferLayoutDescriptorArray>(_MTL_PRIVATE_CLS(MTLBufferLayoutDescriptorArray));
+    return NS::Object::alloc<MTL::BufferLayoutDescriptorArray>(
+        _MTL_PRIVATE_CLS(MTLBufferLayoutDescriptorArray));
 }
 
 // method: init
@@ -242,15 +238,19 @@ _MTL_INLINE MTL::BufferLayoutDescriptorArray* MTL::BufferLayoutDescriptorArray::
 }
 
 // method: objectAtIndexedSubscript:
-_MTL_INLINE MTL::BufferLayoutDescriptor* MTL::BufferLayoutDescriptorArray::object(NS::UInteger index)
+_MTL_INLINE MTL::BufferLayoutDescriptor* MTL::BufferLayoutDescriptorArray::object(
+    NS::UInteger index)
 {
-    return Object::sendMessage<MTL::BufferLayoutDescriptor*>(this, _MTL_PRIVATE_SEL(objectAtIndexedSubscript_), index);
+    return Object::sendMessage<MTL::BufferLayoutDescriptor*>(
+        this, _MTL_PRIVATE_SEL(objectAtIndexedSubscript_), index);
 }
 
 // method: setObject:atIndexedSubscript:
-_MTL_INLINE void MTL::BufferLayoutDescriptorArray::setObject(const MTL::BufferLayoutDescriptor* bufferDesc, NS::UInteger index)
+_MTL_INLINE void MTL::BufferLayoutDescriptorArray::setObject(
+    const MTL::BufferLayoutDescriptor* bufferDesc, NS::UInteger index)
 {
-    Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(setObject_atIndexedSubscript_), bufferDesc, index);
+    Object::sendMessage<void>(
+        this, _MTL_PRIVATE_SEL(setObject_atIndexedSubscript_), bufferDesc, index);
 }
 
 // static method: alloc
@@ -301,7 +301,8 @@ _MTL_INLINE void MTL::AttributeDescriptor::setBufferIndex(NS::UInteger bufferInd
 // static method: alloc
 _MTL_INLINE MTL::AttributeDescriptorArray* MTL::AttributeDescriptorArray::alloc()
 {
-    return NS::Object::alloc<MTL::AttributeDescriptorArray>(_MTL_PRIVATE_CLS(MTLAttributeDescriptorArray));
+    return NS::Object::alloc<MTL::AttributeDescriptorArray>(
+        _MTL_PRIVATE_CLS(MTLAttributeDescriptorArray));
 }
 
 // method: init
@@ -313,19 +314,23 @@ _MTL_INLINE MTL::AttributeDescriptorArray* MTL::AttributeDescriptorArray::init()
 // method: objectAtIndexedSubscript:
 _MTL_INLINE MTL::AttributeDescriptor* MTL::AttributeDescriptorArray::object(NS::UInteger index)
 {
-    return Object::sendMessage<MTL::AttributeDescriptor*>(this, _MTL_PRIVATE_SEL(objectAtIndexedSubscript_), index);
+    return Object::sendMessage<MTL::AttributeDescriptor*>(
+        this, _MTL_PRIVATE_SEL(objectAtIndexedSubscript_), index);
 }
 
 // method: setObject:atIndexedSubscript:
-_MTL_INLINE void MTL::AttributeDescriptorArray::setObject(const MTL::AttributeDescriptor* attributeDesc, NS::UInteger index)
+_MTL_INLINE void MTL::AttributeDescriptorArray::setObject(
+    const MTL::AttributeDescriptor* attributeDesc, NS::UInteger index)
 {
-    Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(setObject_atIndexedSubscript_), attributeDesc, index);
+    Object::sendMessage<void>(
+        this, _MTL_PRIVATE_SEL(setObject_atIndexedSubscript_), attributeDesc, index);
 }
 
 // static method: alloc
 _MTL_INLINE MTL::StageInputOutputDescriptor* MTL::StageInputOutputDescriptor::alloc()
 {
-    return NS::Object::alloc<MTL::StageInputOutputDescriptor>(_MTL_PRIVATE_CLS(MTLStageInputOutputDescriptor));
+    return NS::Object::alloc<MTL::StageInputOutputDescriptor>(
+        _MTL_PRIVATE_CLS(MTLStageInputOutputDescriptor));
 }
 
 // method: init
@@ -335,9 +340,12 @@ _MTL_INLINE MTL::StageInputOutputDescriptor* MTL::StageInputOutputDescriptor::in
 }
 
 // static method: stageInputOutputDescriptor
-_MTL_INLINE MTL::StageInputOutputDescriptor* MTL::StageInputOutputDescriptor::stageInputOutputDescriptor()
+_MTL_INLINE MTL::StageInputOutputDescriptor*
+MTL::StageInputOutputDescriptor::stageInputOutputDescriptor()
 {
-    return Object::sendMessage<MTL::StageInputOutputDescriptor*>(_MTL_PRIVATE_CLS(MTLStageInputOutputDescriptor), _MTL_PRIVATE_SEL(stageInputOutputDescriptor));
+    return Object::sendMessage<MTL::StageInputOutputDescriptor*>(
+        _MTL_PRIVATE_CLS(MTLStageInputOutputDescriptor),
+        _MTL_PRIVATE_SEL(stageInputOutputDescriptor));
 }
 
 // property: layouts

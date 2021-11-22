@@ -32,9 +32,8 @@
 #include "MTLTypes.hpp"
 #include <IOSurface/IOSurfaceRef.h>
 
-namespace MTL
-{
-_MTL_ENUM(NS::UInteger, TextureType) {
+namespace MTL {
+_MTL_ENUM(NS::UInteger, TextureType){
     TextureType1D = 0,
     TextureType1DArray = 1,
     TextureType2D = 2,
@@ -47,7 +46,7 @@ _MTL_ENUM(NS::UInteger, TextureType) {
     TextureTypeTextureBuffer = 9,
 };
 
-_MTL_ENUM(uint8_t, TextureSwizzle) {
+_MTL_ENUM(uint8_t, TextureSwizzle){
     TextureSwizzleZero = 0,
     TextureSwizzleOne = 1,
     TextureSwizzleRed = 2,
@@ -56,31 +55,28 @@ _MTL_ENUM(uint8_t, TextureSwizzle) {
     TextureSwizzleAlpha = 5,
 };
 
-struct TextureSwizzleChannels
-{
+struct TextureSwizzleChannels {
     MTL::TextureSwizzle red;
     MTL::TextureSwizzle green;
     MTL::TextureSwizzle blue;
     MTL::TextureSwizzle alpha;
 } _MTL_PACKED;
 
-class SharedTextureHandle : public NS::Referencing<SharedTextureHandle>
-{
+class SharedTextureHandle : public NS::Referencing<SharedTextureHandle> {
 public:
     static class SharedTextureHandle* alloc();
 
-    class SharedTextureHandle*        init();
+    class SharedTextureHandle* init();
 
-    class Device*                     device() const;
+    class Device* device() const;
 
-    NS::String*                       label() const;
+    NS::String* label() const;
 };
 
-struct SharedTextureHandlePrivate
-{
+struct SharedTextureHandlePrivate {
 } _MTL_PACKED;
 
-_MTL_OPTIONS(NS::UInteger, TextureUsage) {
+_MTL_OPTIONS(NS::UInteger, TextureUsage){
     TextureUsageUnknown = 0,
     TextureUsageShaderRead = 1,
     TextureUsageShaderWrite = 2,
@@ -88,145 +84,152 @@ _MTL_OPTIONS(NS::UInteger, TextureUsage) {
     TextureUsagePixelFormatView = 16,
 };
 
-_MTL_ENUM(NS::Integer, TextureCompressionType) {
+_MTL_ENUM(NS::Integer, TextureCompressionType){
     TextureCompressionTypeLossless = 0,
     TextureCompressionTypeLossy = 1,
 };
 
-class TextureDescriptor : public NS::Copying<TextureDescriptor>
-{
+class TextureDescriptor : public NS::Copying<TextureDescriptor> {
 public:
     static class TextureDescriptor* alloc();
 
-    class TextureDescriptor*        init();
+    class TextureDescriptor* init();
 
-    static class TextureDescriptor* texture2DDescriptor(MTL::PixelFormat pixelFormat, NS::UInteger width, NS::UInteger height, bool mipmapped);
+    static class TextureDescriptor* texture2DDescriptor(
+        MTL::PixelFormat pixelFormat, NS::UInteger width, NS::UInteger height, bool mipmapped);
 
-    static class TextureDescriptor* textureCubeDescriptor(MTL::PixelFormat pixelFormat, NS::UInteger size, bool mipmapped);
+    static class TextureDescriptor* textureCubeDescriptor(
+        MTL::PixelFormat pixelFormat, NS::UInteger size, bool mipmapped);
 
-    static class TextureDescriptor* textureBufferDescriptor(MTL::PixelFormat pixelFormat, NS::UInteger width, MTL::ResourceOptions resourceOptions, MTL::TextureUsage usage);
+    static class TextureDescriptor* textureBufferDescriptor(MTL::PixelFormat pixelFormat,
+        NS::UInteger width, MTL::ResourceOptions resourceOptions, MTL::TextureUsage usage);
 
-    MTL::TextureType                textureType() const;
-    void                            setTextureType(MTL::TextureType textureType);
+    MTL::TextureType textureType() const;
+    void setTextureType(MTL::TextureType textureType);
 
-    MTL::PixelFormat                pixelFormat() const;
-    void                            setPixelFormat(MTL::PixelFormat pixelFormat);
+    MTL::PixelFormat pixelFormat() const;
+    void setPixelFormat(MTL::PixelFormat pixelFormat);
 
-    NS::UInteger                    width() const;
-    void                            setWidth(NS::UInteger width);
+    NS::UInteger width() const;
+    void setWidth(NS::UInteger width);
 
-    NS::UInteger                    height() const;
-    void                            setHeight(NS::UInteger height);
+    NS::UInteger height() const;
+    void setHeight(NS::UInteger height);
 
-    NS::UInteger                    depth() const;
-    void                            setDepth(NS::UInteger depth);
+    NS::UInteger depth() const;
+    void setDepth(NS::UInteger depth);
 
-    NS::UInteger                    mipmapLevelCount() const;
-    void                            setMipmapLevelCount(NS::UInteger mipmapLevelCount);
+    NS::UInteger mipmapLevelCount() const;
+    void setMipmapLevelCount(NS::UInteger mipmapLevelCount);
 
-    NS::UInteger                    sampleCount() const;
-    void                            setSampleCount(NS::UInteger sampleCount);
+    NS::UInteger sampleCount() const;
+    void setSampleCount(NS::UInteger sampleCount);
 
-    NS::UInteger                    arrayLength() const;
-    void                            setArrayLength(NS::UInteger arrayLength);
+    NS::UInteger arrayLength() const;
+    void setArrayLength(NS::UInteger arrayLength);
 
-    MTL::ResourceOptions            resourceOptions() const;
-    void                            setResourceOptions(MTL::ResourceOptions resourceOptions);
+    MTL::ResourceOptions resourceOptions() const;
+    void setResourceOptions(MTL::ResourceOptions resourceOptions);
 
-    MTL::CPUCacheMode               cpuCacheMode() const;
-    void                            setCpuCacheMode(MTL::CPUCacheMode cpuCacheMode);
+    MTL::CPUCacheMode cpuCacheMode() const;
+    void setCpuCacheMode(MTL::CPUCacheMode cpuCacheMode);
 
-    MTL::StorageMode                storageMode() const;
-    void                            setStorageMode(MTL::StorageMode storageMode);
+    MTL::StorageMode storageMode() const;
+    void setStorageMode(MTL::StorageMode storageMode);
 
-    MTL::HazardTrackingMode         hazardTrackingMode() const;
-    void                            setHazardTrackingMode(MTL::HazardTrackingMode hazardTrackingMode);
+    MTL::HazardTrackingMode hazardTrackingMode() const;
+    void setHazardTrackingMode(MTL::HazardTrackingMode hazardTrackingMode);
 
-    MTL::TextureUsage               usage() const;
-    void                            setUsage(MTL::TextureUsage usage);
+    MTL::TextureUsage usage() const;
+    void setUsage(MTL::TextureUsage usage);
 
-    bool                            allowGPUOptimizedContents() const;
-    void                            setAllowGPUOptimizedContents(bool allowGPUOptimizedContents);
+    bool allowGPUOptimizedContents() const;
+    void setAllowGPUOptimizedContents(bool allowGPUOptimizedContents);
 
-    MTL::TextureSwizzleChannels     swizzle() const;
-    void                            setSwizzle(MTL::TextureSwizzleChannels swizzle);
+    MTL::TextureSwizzleChannels swizzle() const;
+    void setSwizzle(MTL::TextureSwizzleChannels swizzle);
 };
 
-class Texture : public NS::Referencing<Texture, Resource>
-{
+class Texture : public NS::Referencing<Texture, Resource> {
 public:
-    class Resource*             rootResource() const;
+    class Resource* rootResource() const;
 
-    class Texture*              parentTexture() const;
+    class Texture* parentTexture() const;
 
-    NS::UInteger                parentRelativeLevel() const;
+    NS::UInteger parentRelativeLevel() const;
 
-    NS::UInteger                parentRelativeSlice() const;
+    NS::UInteger parentRelativeSlice() const;
 
-    class Buffer*               buffer() const;
+    class Buffer* buffer() const;
 
-    NS::UInteger                bufferOffset() const;
+    NS::UInteger bufferOffset() const;
 
-    NS::UInteger                bufferBytesPerRow() const;
+    NS::UInteger bufferBytesPerRow() const;
 
-    IOSurfaceRef                iosurface() const;
+    IOSurfaceRef iosurface() const;
 
-    NS::UInteger                iosurfacePlane() const;
+    NS::UInteger iosurfacePlane() const;
 
-    MTL::TextureType            textureType() const;
+    MTL::TextureType textureType() const;
 
-    MTL::PixelFormat            pixelFormat() const;
+    MTL::PixelFormat pixelFormat() const;
 
-    NS::UInteger                width() const;
+    NS::UInteger width() const;
 
-    NS::UInteger                height() const;
+    NS::UInteger height() const;
 
-    NS::UInteger                depth() const;
+    NS::UInteger depth() const;
 
-    NS::UInteger                mipmapLevelCount() const;
+    NS::UInteger mipmapLevelCount() const;
 
-    NS::UInteger                sampleCount() const;
+    NS::UInteger sampleCount() const;
 
-    NS::UInteger                arrayLength() const;
+    NS::UInteger arrayLength() const;
 
-    MTL::TextureUsage           usage() const;
+    MTL::TextureUsage usage() const;
 
-    bool                        shareable() const;
+    bool shareable() const;
 
-    bool                        framebufferOnly() const;
+    bool framebufferOnly() const;
 
-    NS::UInteger                firstMipmapInTail() const;
+    NS::UInteger firstMipmapInTail() const;
 
-    NS::UInteger                tailSizeInBytes() const;
+    NS::UInteger tailSizeInBytes() const;
 
-    bool                        isSparse() const;
+    bool isSparse() const;
 
-    bool                        allowGPUOptimizedContents() const;
+    bool allowGPUOptimizedContents() const;
 
-    void                        getBytes(const void* pixelBytes, NS::UInteger bytesPerRow, NS::UInteger bytesPerImage, MTL::Region region, NS::UInteger level, NS::UInteger slice);
+    void getBytes(const void* pixelBytes, NS::UInteger bytesPerRow, NS::UInteger bytesPerImage,
+        MTL::Region region, NS::UInteger level, NS::UInteger slice);
 
-    void                        replaceRegion(MTL::Region region, NS::UInteger level, NS::UInteger slice, const void* pixelBytes, NS::UInteger bytesPerRow, NS::UInteger bytesPerImage);
+    void replaceRegion(MTL::Region region, NS::UInteger level, NS::UInteger slice,
+        const void* pixelBytes, NS::UInteger bytesPerRow, NS::UInteger bytesPerImage);
 
-    void                        getBytes(const void* pixelBytes, NS::UInteger bytesPerRow, MTL::Region region, NS::UInteger level);
+    void getBytes(
+        const void* pixelBytes, NS::UInteger bytesPerRow, MTL::Region region, NS::UInteger level);
 
-    void                        replaceRegion(MTL::Region region, NS::UInteger level, const void* pixelBytes, NS::UInteger bytesPerRow);
+    void replaceRegion(
+        MTL::Region region, NS::UInteger level, const void* pixelBytes, NS::UInteger bytesPerRow);
 
-    class Texture*              newTextureView(MTL::PixelFormat pixelFormat);
+    class Texture* newTextureView(MTL::PixelFormat pixelFormat);
 
-    class Texture*              newTextureView(MTL::PixelFormat pixelFormat, MTL::TextureType textureType, NS::Range levelRange, NS::Range sliceRange);
+    class Texture* newTextureView(MTL::PixelFormat pixelFormat, MTL::TextureType textureType,
+        NS::Range levelRange, NS::Range sliceRange);
 
-    class SharedTextureHandle*  newSharedTextureHandle();
+    class SharedTextureHandle* newSharedTextureHandle();
 
-    class Texture*              remoteStorageTexture() const;
+    class Texture* remoteStorageTexture() const;
 
-    class Texture*              newRemoteTextureViewForDevice(const class Device* device);
+    class Texture* newRemoteTextureViewForDevice(const class Device* device);
 
     MTL::TextureSwizzleChannels swizzle() const;
 
-    class Texture*              newTextureView(MTL::PixelFormat pixelFormat, MTL::TextureType textureType, NS::Range levelRange, NS::Range sliceRange, MTL::TextureSwizzleChannels swizzle);
+    class Texture* newTextureView(MTL::PixelFormat pixelFormat, MTL::TextureType textureType,
+        NS::Range levelRange, NS::Range sliceRange, MTL::TextureSwizzleChannels swizzle);
 };
 
-}
+} // namespace MTL
 
 // static method: alloc
 _MTL_INLINE MTL::SharedTextureHandle* MTL::SharedTextureHandle::alloc()
@@ -265,21 +268,31 @@ _MTL_INLINE MTL::TextureDescriptor* MTL::TextureDescriptor::init()
 }
 
 // static method: texture2DDescriptorWithPixelFormat:width:height:mipmapped:
-_MTL_INLINE MTL::TextureDescriptor* MTL::TextureDescriptor::texture2DDescriptor(MTL::PixelFormat pixelFormat, NS::UInteger width, NS::UInteger height, bool mipmapped)
+_MTL_INLINE MTL::TextureDescriptor* MTL::TextureDescriptor::texture2DDescriptor(
+    MTL::PixelFormat pixelFormat, NS::UInteger width, NS::UInteger height, bool mipmapped)
 {
-    return Object::sendMessage<MTL::TextureDescriptor*>(_MTL_PRIVATE_CLS(MTLTextureDescriptor), _MTL_PRIVATE_SEL(texture2DDescriptorWithPixelFormat_width_height_mipmapped_), pixelFormat, width, height, mipmapped);
+    return Object::sendMessage<MTL::TextureDescriptor*>(_MTL_PRIVATE_CLS(MTLTextureDescriptor),
+        _MTL_PRIVATE_SEL(texture2DDescriptorWithPixelFormat_width_height_mipmapped_), pixelFormat,
+        width, height, mipmapped);
 }
 
 // static method: textureCubeDescriptorWithPixelFormat:size:mipmapped:
-_MTL_INLINE MTL::TextureDescriptor* MTL::TextureDescriptor::textureCubeDescriptor(MTL::PixelFormat pixelFormat, NS::UInteger size, bool mipmapped)
+_MTL_INLINE MTL::TextureDescriptor* MTL::TextureDescriptor::textureCubeDescriptor(
+    MTL::PixelFormat pixelFormat, NS::UInteger size, bool mipmapped)
 {
-    return Object::sendMessage<MTL::TextureDescriptor*>(_MTL_PRIVATE_CLS(MTLTextureDescriptor), _MTL_PRIVATE_SEL(textureCubeDescriptorWithPixelFormat_size_mipmapped_), pixelFormat, size, mipmapped);
+    return Object::sendMessage<MTL::TextureDescriptor*>(_MTL_PRIVATE_CLS(MTLTextureDescriptor),
+        _MTL_PRIVATE_SEL(textureCubeDescriptorWithPixelFormat_size_mipmapped_), pixelFormat, size,
+        mipmapped);
 }
 
 // static method: textureBufferDescriptorWithPixelFormat:width:resourceOptions:usage:
-_MTL_INLINE MTL::TextureDescriptor* MTL::TextureDescriptor::textureBufferDescriptor(MTL::PixelFormat pixelFormat, NS::UInteger width, MTL::ResourceOptions resourceOptions, MTL::TextureUsage usage)
+_MTL_INLINE MTL::TextureDescriptor* MTL::TextureDescriptor::textureBufferDescriptor(
+    MTL::PixelFormat pixelFormat, NS::UInteger width, MTL::ResourceOptions resourceOptions,
+    MTL::TextureUsage usage)
 {
-    return Object::sendMessage<MTL::TextureDescriptor*>(_MTL_PRIVATE_CLS(MTLTextureDescriptor), _MTL_PRIVATE_SEL(textureBufferDescriptorWithPixelFormat_width_resourceOptions_usage_), pixelFormat, width, resourceOptions, usage);
+    return Object::sendMessage<MTL::TextureDescriptor*>(_MTL_PRIVATE_CLS(MTLTextureDescriptor),
+        _MTL_PRIVATE_SEL(textureBufferDescriptorWithPixelFormat_width_resourceOptions_usage_),
+        pixelFormat, width, resourceOptions, usage);
 }
 
 // property: textureType
@@ -409,7 +422,8 @@ _MTL_INLINE MTL::HazardTrackingMode MTL::TextureDescriptor::hazardTrackingMode()
     return Object::sendMessage<MTL::HazardTrackingMode>(this, _MTL_PRIVATE_SEL(hazardTrackingMode));
 }
 
-_MTL_INLINE void MTL::TextureDescriptor::setHazardTrackingMode(MTL::HazardTrackingMode hazardTrackingMode)
+_MTL_INLINE void MTL::TextureDescriptor::setHazardTrackingMode(
+    MTL::HazardTrackingMode hazardTrackingMode)
 {
     Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(setHazardTrackingMode_), hazardTrackingMode);
 }
@@ -431,9 +445,11 @@ _MTL_INLINE bool MTL::TextureDescriptor::allowGPUOptimizedContents() const
     return Object::sendMessage<bool>(this, _MTL_PRIVATE_SEL(allowGPUOptimizedContents));
 }
 
-_MTL_INLINE void MTL::TextureDescriptor::setAllowGPUOptimizedContents(bool allowGPUOptimizedContents)
+_MTL_INLINE void MTL::TextureDescriptor::setAllowGPUOptimizedContents(
+    bool allowGPUOptimizedContents)
 {
-    Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(setAllowGPUOptimizedContents_), allowGPUOptimizedContents);
+    Object::sendMessage<void>(
+        this, _MTL_PRIVATE_SEL(setAllowGPUOptimizedContents_), allowGPUOptimizedContents);
 }
 
 // property: swizzle
@@ -592,45 +608,62 @@ _MTL_INLINE bool MTL::Texture::allowGPUOptimizedContents() const
 }
 
 // method: getBytes:bytesPerRow:bytesPerImage:fromRegion:mipmapLevel:slice:
-_MTL_INLINE void MTL::Texture::getBytes(const void* pixelBytes, NS::UInteger bytesPerRow, NS::UInteger bytesPerImage, MTL::Region region, NS::UInteger level, NS::UInteger slice)
+_MTL_INLINE void MTL::Texture::getBytes(const void* pixelBytes, NS::UInteger bytesPerRow,
+    NS::UInteger bytesPerImage, MTL::Region region, NS::UInteger level, NS::UInteger slice)
 {
-    Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(getBytes_bytesPerRow_bytesPerImage_fromRegion_mipmapLevel_slice_), pixelBytes, bytesPerRow, bytesPerImage, region, level, slice);
+    Object::sendMessage<void>(this,
+        _MTL_PRIVATE_SEL(getBytes_bytesPerRow_bytesPerImage_fromRegion_mipmapLevel_slice_),
+        pixelBytes, bytesPerRow, bytesPerImage, region, level, slice);
 }
 
 // method: replaceRegion:mipmapLevel:slice:withBytes:bytesPerRow:bytesPerImage:
-_MTL_INLINE void MTL::Texture::replaceRegion(MTL::Region region, NS::UInteger level, NS::UInteger slice, const void* pixelBytes, NS::UInteger bytesPerRow, NS::UInteger bytesPerImage)
+_MTL_INLINE void MTL::Texture::replaceRegion(MTL::Region region, NS::UInteger level,
+    NS::UInteger slice, const void* pixelBytes, NS::UInteger bytesPerRow,
+    NS::UInteger bytesPerImage)
 {
-    Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(replaceRegion_mipmapLevel_slice_withBytes_bytesPerRow_bytesPerImage_), region, level, slice, pixelBytes, bytesPerRow, bytesPerImage);
+    Object::sendMessage<void>(this,
+        _MTL_PRIVATE_SEL(replaceRegion_mipmapLevel_slice_withBytes_bytesPerRow_bytesPerImage_),
+        region, level, slice, pixelBytes, bytesPerRow, bytesPerImage);
 }
 
 // method: getBytes:bytesPerRow:fromRegion:mipmapLevel:
-_MTL_INLINE void MTL::Texture::getBytes(const void* pixelBytes, NS::UInteger bytesPerRow, MTL::Region region, NS::UInteger level)
+_MTL_INLINE void MTL::Texture::getBytes(
+    const void* pixelBytes, NS::UInteger bytesPerRow, MTL::Region region, NS::UInteger level)
 {
-    Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(getBytes_bytesPerRow_fromRegion_mipmapLevel_), pixelBytes, bytesPerRow, region, level);
+    Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(getBytes_bytesPerRow_fromRegion_mipmapLevel_),
+        pixelBytes, bytesPerRow, region, level);
 }
 
 // method: replaceRegion:mipmapLevel:withBytes:bytesPerRow:
-_MTL_INLINE void MTL::Texture::replaceRegion(MTL::Region region, NS::UInteger level, const void* pixelBytes, NS::UInteger bytesPerRow)
+_MTL_INLINE void MTL::Texture::replaceRegion(
+    MTL::Region region, NS::UInteger level, const void* pixelBytes, NS::UInteger bytesPerRow)
 {
-    Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(replaceRegion_mipmapLevel_withBytes_bytesPerRow_), region, level, pixelBytes, bytesPerRow);
+    Object::sendMessage<void>(this,
+        _MTL_PRIVATE_SEL(replaceRegion_mipmapLevel_withBytes_bytesPerRow_), region, level,
+        pixelBytes, bytesPerRow);
 }
 
 // method: newTextureViewWithPixelFormat:
 _MTL_INLINE MTL::Texture* MTL::Texture::newTextureView(MTL::PixelFormat pixelFormat)
 {
-    return Object::sendMessage<MTL::Texture*>(this, _MTL_PRIVATE_SEL(newTextureViewWithPixelFormat_), pixelFormat);
+    return Object::sendMessage<MTL::Texture*>(
+        this, _MTL_PRIVATE_SEL(newTextureViewWithPixelFormat_), pixelFormat);
 }
 
 // method: newTextureViewWithPixelFormat:textureType:levels:slices:
-_MTL_INLINE MTL::Texture* MTL::Texture::newTextureView(MTL::PixelFormat pixelFormat, MTL::TextureType textureType, NS::Range levelRange, NS::Range sliceRange)
+_MTL_INLINE MTL::Texture* MTL::Texture::newTextureView(MTL::PixelFormat pixelFormat,
+    MTL::TextureType textureType, NS::Range levelRange, NS::Range sliceRange)
 {
-    return Object::sendMessage<MTL::Texture*>(this, _MTL_PRIVATE_SEL(newTextureViewWithPixelFormat_textureType_levels_slices_), pixelFormat, textureType, levelRange, sliceRange);
+    return Object::sendMessage<MTL::Texture*>(this,
+        _MTL_PRIVATE_SEL(newTextureViewWithPixelFormat_textureType_levels_slices_), pixelFormat,
+        textureType, levelRange, sliceRange);
 }
 
 // method: newSharedTextureHandle
 _MTL_INLINE MTL::SharedTextureHandle* MTL::Texture::newSharedTextureHandle()
 {
-    return Object::sendMessage<MTL::SharedTextureHandle*>(this, _MTL_PRIVATE_SEL(newSharedTextureHandle));
+    return Object::sendMessage<MTL::SharedTextureHandle*>(
+        this, _MTL_PRIVATE_SEL(newSharedTextureHandle));
 }
 
 // property: remoteStorageTexture
@@ -642,7 +675,8 @@ _MTL_INLINE MTL::Texture* MTL::Texture::remoteStorageTexture() const
 // method: newRemoteTextureViewForDevice:
 _MTL_INLINE MTL::Texture* MTL::Texture::newRemoteTextureViewForDevice(const MTL::Device* device)
 {
-    return Object::sendMessage<MTL::Texture*>(this, _MTL_PRIVATE_SEL(newRemoteTextureViewForDevice_), device);
+    return Object::sendMessage<MTL::Texture*>(
+        this, _MTL_PRIVATE_SEL(newRemoteTextureViewForDevice_), device);
 }
 
 // property: swizzle
@@ -652,7 +686,11 @@ _MTL_INLINE MTL::TextureSwizzleChannels MTL::Texture::swizzle() const
 }
 
 // method: newTextureViewWithPixelFormat:textureType:levels:slices:swizzle:
-_MTL_INLINE MTL::Texture* MTL::Texture::newTextureView(MTL::PixelFormat pixelFormat, MTL::TextureType textureType, NS::Range levelRange, NS::Range sliceRange, MTL::TextureSwizzleChannels swizzle)
+_MTL_INLINE MTL::Texture* MTL::Texture::newTextureView(MTL::PixelFormat pixelFormat,
+    MTL::TextureType textureType, NS::Range levelRange, NS::Range sliceRange,
+    MTL::TextureSwizzleChannels swizzle)
 {
-    return Object::sendMessage<MTL::Texture*>(this, _MTL_PRIVATE_SEL(newTextureViewWithPixelFormat_textureType_levels_slices_swizzle_), pixelFormat, textureType, levelRange, sliceRange, swizzle);
+    return Object::sendMessage<MTL::Texture*>(this,
+        _MTL_PRIVATE_SEL(newTextureViewWithPixelFormat_textureType_levels_slices_swizzle_),
+        pixelFormat, textureType, levelRange, sliceRange, swizzle);
 }

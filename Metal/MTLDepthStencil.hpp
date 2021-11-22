@@ -28,9 +28,8 @@
 
 #include "MTLDepthStencil.hpp"
 
-namespace MTL
-{
-_MTL_ENUM(NS::UInteger, CompareFunction) {
+namespace MTL {
+_MTL_ENUM(NS::UInteger, CompareFunction){
     CompareFunctionNever = 0,
     CompareFunctionLess = 1,
     CompareFunctionEqual = 2,
@@ -41,7 +40,7 @@ _MTL_ENUM(NS::UInteger, CompareFunction) {
     CompareFunctionAlways = 7,
 };
 
-_MTL_ENUM(NS::UInteger, StencilOperation) {
+_MTL_ENUM(NS::UInteger, StencilOperation){
     StencilOperationKeep = 0,
     StencilOperationZero = 1,
     StencilOperationReplace = 2,
@@ -52,64 +51,61 @@ _MTL_ENUM(NS::UInteger, StencilOperation) {
     StencilOperationDecrementWrap = 7,
 };
 
-class StencilDescriptor : public NS::Copying<StencilDescriptor>
-{
+class StencilDescriptor : public NS::Copying<StencilDescriptor> {
 public:
     static class StencilDescriptor* alloc();
 
-    class StencilDescriptor*        init();
+    class StencilDescriptor* init();
 
-    MTL::CompareFunction            stencilCompareFunction() const;
-    void                            setStencilCompareFunction(MTL::CompareFunction stencilCompareFunction);
+    MTL::CompareFunction stencilCompareFunction() const;
+    void setStencilCompareFunction(MTL::CompareFunction stencilCompareFunction);
 
-    MTL::StencilOperation           stencilFailureOperation() const;
-    void                            setStencilFailureOperation(MTL::StencilOperation stencilFailureOperation);
+    MTL::StencilOperation stencilFailureOperation() const;
+    void setStencilFailureOperation(MTL::StencilOperation stencilFailureOperation);
 
-    MTL::StencilOperation           depthFailureOperation() const;
-    void                            setDepthFailureOperation(MTL::StencilOperation depthFailureOperation);
+    MTL::StencilOperation depthFailureOperation() const;
+    void setDepthFailureOperation(MTL::StencilOperation depthFailureOperation);
 
-    MTL::StencilOperation           depthStencilPassOperation() const;
-    void                            setDepthStencilPassOperation(MTL::StencilOperation depthStencilPassOperation);
+    MTL::StencilOperation depthStencilPassOperation() const;
+    void setDepthStencilPassOperation(MTL::StencilOperation depthStencilPassOperation);
 
-    uint32_t                        readMask() const;
-    void                            setReadMask(uint32_t readMask);
+    uint32_t readMask() const;
+    void setReadMask(uint32_t readMask);
 
-    uint32_t                        writeMask() const;
-    void                            setWriteMask(uint32_t writeMask);
+    uint32_t writeMask() const;
+    void setWriteMask(uint32_t writeMask);
 };
 
-class DepthStencilDescriptor : public NS::Copying<DepthStencilDescriptor>
-{
+class DepthStencilDescriptor : public NS::Copying<DepthStencilDescriptor> {
 public:
     static class DepthStencilDescriptor* alloc();
 
-    class DepthStencilDescriptor*        init();
+    class DepthStencilDescriptor* init();
 
-    MTL::CompareFunction                 depthCompareFunction() const;
-    void                                 setDepthCompareFunction(MTL::CompareFunction depthCompareFunction);
+    MTL::CompareFunction depthCompareFunction() const;
+    void setDepthCompareFunction(MTL::CompareFunction depthCompareFunction);
 
-    bool                                 depthWriteEnabled() const;
-    void                                 setDepthWriteEnabled(bool depthWriteEnabled);
+    bool depthWriteEnabled() const;
+    void setDepthWriteEnabled(bool depthWriteEnabled);
 
-    class StencilDescriptor*             frontFaceStencil() const;
-    void                                 setFrontFaceStencil(const class StencilDescriptor* frontFaceStencil);
+    class StencilDescriptor* frontFaceStencil() const;
+    void setFrontFaceStencil(const class StencilDescriptor* frontFaceStencil);
 
-    class StencilDescriptor*             backFaceStencil() const;
-    void                                 setBackFaceStencil(const class StencilDescriptor* backFaceStencil);
+    class StencilDescriptor* backFaceStencil() const;
+    void setBackFaceStencil(const class StencilDescriptor* backFaceStencil);
 
-    NS::String*                          label() const;
-    void                                 setLabel(const NS::String* label);
+    NS::String* label() const;
+    void setLabel(const NS::String* label);
 };
 
-class DepthStencilState : public NS::Referencing<DepthStencilState>
-{
+class DepthStencilState : public NS::Referencing<DepthStencilState> {
 public:
-    NS::String*   label() const;
+    NS::String* label() const;
 
     class Device* device() const;
 };
 
-}
+} // namespace MTL
 
 // static method: alloc
 _MTL_INLINE MTL::StencilDescriptor* MTL::StencilDescriptor::alloc()
@@ -126,45 +122,57 @@ _MTL_INLINE MTL::StencilDescriptor* MTL::StencilDescriptor::init()
 // property: stencilCompareFunction
 _MTL_INLINE MTL::CompareFunction MTL::StencilDescriptor::stencilCompareFunction() const
 {
-    return Object::sendMessage<MTL::CompareFunction>(this, _MTL_PRIVATE_SEL(stencilCompareFunction));
+    return Object::sendMessage<MTL::CompareFunction>(
+        this, _MTL_PRIVATE_SEL(stencilCompareFunction));
 }
 
-_MTL_INLINE void MTL::StencilDescriptor::setStencilCompareFunction(MTL::CompareFunction stencilCompareFunction)
+_MTL_INLINE void MTL::StencilDescriptor::setStencilCompareFunction(
+    MTL::CompareFunction stencilCompareFunction)
 {
-    Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(setStencilCompareFunction_), stencilCompareFunction);
+    Object::sendMessage<void>(
+        this, _MTL_PRIVATE_SEL(setStencilCompareFunction_), stencilCompareFunction);
 }
 
 // property: stencilFailureOperation
 _MTL_INLINE MTL::StencilOperation MTL::StencilDescriptor::stencilFailureOperation() const
 {
-    return Object::sendMessage<MTL::StencilOperation>(this, _MTL_PRIVATE_SEL(stencilFailureOperation));
+    return Object::sendMessage<MTL::StencilOperation>(
+        this, _MTL_PRIVATE_SEL(stencilFailureOperation));
 }
 
-_MTL_INLINE void MTL::StencilDescriptor::setStencilFailureOperation(MTL::StencilOperation stencilFailureOperation)
+_MTL_INLINE void MTL::StencilDescriptor::setStencilFailureOperation(
+    MTL::StencilOperation stencilFailureOperation)
 {
-    Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(setStencilFailureOperation_), stencilFailureOperation);
+    Object::sendMessage<void>(
+        this, _MTL_PRIVATE_SEL(setStencilFailureOperation_), stencilFailureOperation);
 }
 
 // property: depthFailureOperation
 _MTL_INLINE MTL::StencilOperation MTL::StencilDescriptor::depthFailureOperation() const
 {
-    return Object::sendMessage<MTL::StencilOperation>(this, _MTL_PRIVATE_SEL(depthFailureOperation));
+    return Object::sendMessage<MTL::StencilOperation>(
+        this, _MTL_PRIVATE_SEL(depthFailureOperation));
 }
 
-_MTL_INLINE void MTL::StencilDescriptor::setDepthFailureOperation(MTL::StencilOperation depthFailureOperation)
+_MTL_INLINE void MTL::StencilDescriptor::setDepthFailureOperation(
+    MTL::StencilOperation depthFailureOperation)
 {
-    Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(setDepthFailureOperation_), depthFailureOperation);
+    Object::sendMessage<void>(
+        this, _MTL_PRIVATE_SEL(setDepthFailureOperation_), depthFailureOperation);
 }
 
 // property: depthStencilPassOperation
 _MTL_INLINE MTL::StencilOperation MTL::StencilDescriptor::depthStencilPassOperation() const
 {
-    return Object::sendMessage<MTL::StencilOperation>(this, _MTL_PRIVATE_SEL(depthStencilPassOperation));
+    return Object::sendMessage<MTL::StencilOperation>(
+        this, _MTL_PRIVATE_SEL(depthStencilPassOperation));
 }
 
-_MTL_INLINE void MTL::StencilDescriptor::setDepthStencilPassOperation(MTL::StencilOperation depthStencilPassOperation)
+_MTL_INLINE void MTL::StencilDescriptor::setDepthStencilPassOperation(
+    MTL::StencilOperation depthStencilPassOperation)
 {
-    Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(setDepthStencilPassOperation_), depthStencilPassOperation);
+    Object::sendMessage<void>(
+        this, _MTL_PRIVATE_SEL(setDepthStencilPassOperation_), depthStencilPassOperation);
 }
 
 // property: readMask
@@ -192,7 +200,8 @@ _MTL_INLINE void MTL::StencilDescriptor::setWriteMask(uint32_t writeMask)
 // static method: alloc
 _MTL_INLINE MTL::DepthStencilDescriptor* MTL::DepthStencilDescriptor::alloc()
 {
-    return NS::Object::alloc<MTL::DepthStencilDescriptor>(_MTL_PRIVATE_CLS(MTLDepthStencilDescriptor));
+    return NS::Object::alloc<MTL::DepthStencilDescriptor>(
+        _MTL_PRIVATE_CLS(MTLDepthStencilDescriptor));
 }
 
 // method: init
@@ -207,9 +216,11 @@ _MTL_INLINE MTL::CompareFunction MTL::DepthStencilDescriptor::depthCompareFuncti
     return Object::sendMessage<MTL::CompareFunction>(this, _MTL_PRIVATE_SEL(depthCompareFunction));
 }
 
-_MTL_INLINE void MTL::DepthStencilDescriptor::setDepthCompareFunction(MTL::CompareFunction depthCompareFunction)
+_MTL_INLINE void MTL::DepthStencilDescriptor::setDepthCompareFunction(
+    MTL::CompareFunction depthCompareFunction)
 {
-    Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(setDepthCompareFunction_), depthCompareFunction);
+    Object::sendMessage<void>(
+        this, _MTL_PRIVATE_SEL(setDepthCompareFunction_), depthCompareFunction);
 }
 
 // property: depthWriteEnabled
@@ -229,7 +240,8 @@ _MTL_INLINE MTL::StencilDescriptor* MTL::DepthStencilDescriptor::frontFaceStenci
     return Object::sendMessage<MTL::StencilDescriptor*>(this, _MTL_PRIVATE_SEL(frontFaceStencil));
 }
 
-_MTL_INLINE void MTL::DepthStencilDescriptor::setFrontFaceStencil(const MTL::StencilDescriptor* frontFaceStencil)
+_MTL_INLINE void MTL::DepthStencilDescriptor::setFrontFaceStencil(
+    const MTL::StencilDescriptor* frontFaceStencil)
 {
     Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(setFrontFaceStencil_), frontFaceStencil);
 }
@@ -240,7 +252,8 @@ _MTL_INLINE MTL::StencilDescriptor* MTL::DepthStencilDescriptor::backFaceStencil
     return Object::sendMessage<MTL::StencilDescriptor*>(this, _MTL_PRIVATE_SEL(backFaceStencil));
 }
 
-_MTL_INLINE void MTL::DepthStencilDescriptor::setBackFaceStencil(const MTL::StencilDescriptor* backFaceStencil)
+_MTL_INLINE void MTL::DepthStencilDescriptor::setBackFaceStencil(
+    const MTL::StencilDescriptor* backFaceStencil)
 {
     Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(setBackFaceStencil_), backFaceStencil);
 }

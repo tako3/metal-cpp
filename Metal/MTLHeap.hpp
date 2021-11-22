@@ -29,78 +29,75 @@
 #include "MTLHeap.hpp"
 #include "MTLResource.hpp"
 
-namespace MTL
-{
-_MTL_ENUM(NS::Integer, HeapType) {
+namespace MTL {
+_MTL_ENUM(NS::Integer, HeapType){
     HeapTypeAutomatic = 0,
     HeapTypePlacement = 1,
     HeapTypeSparse = 2,
 };
 
-class HeapDescriptor : public NS::Copying<HeapDescriptor>
-{
+class HeapDescriptor : public NS::Copying<HeapDescriptor> {
 public:
     static class HeapDescriptor* alloc();
 
-    class HeapDescriptor*        init();
+    class HeapDescriptor* init();
 
-    NS::UInteger                 size() const;
-    void                         setSize(NS::UInteger size);
+    NS::UInteger size() const;
+    void setSize(NS::UInteger size);
 
-    MTL::StorageMode             storageMode() const;
-    void                         setStorageMode(MTL::StorageMode storageMode);
+    MTL::StorageMode storageMode() const;
+    void setStorageMode(MTL::StorageMode storageMode);
 
-    MTL::CPUCacheMode            cpuCacheMode() const;
-    void                         setCpuCacheMode(MTL::CPUCacheMode cpuCacheMode);
+    MTL::CPUCacheMode cpuCacheMode() const;
+    void setCpuCacheMode(MTL::CPUCacheMode cpuCacheMode);
 
-    MTL::HazardTrackingMode      hazardTrackingMode() const;
-    void                         setHazardTrackingMode(MTL::HazardTrackingMode hazardTrackingMode);
+    MTL::HazardTrackingMode hazardTrackingMode() const;
+    void setHazardTrackingMode(MTL::HazardTrackingMode hazardTrackingMode);
 
-    MTL::ResourceOptions         resourceOptions() const;
-    void                         setResourceOptions(MTL::ResourceOptions resourceOptions);
+    MTL::ResourceOptions resourceOptions() const;
+    void setResourceOptions(MTL::ResourceOptions resourceOptions);
 
-    MTL::HeapType                type() const;
-    void                         setType(MTL::HeapType type);
+    MTL::HeapType type() const;
+    void setType(MTL::HeapType type);
 };
 
-class Heap : public NS::Referencing<Heap>
-{
+class Heap : public NS::Referencing<Heap> {
 public:
-    NS::String*             label() const;
-    void                    setLabel(const NS::String* label);
+    NS::String* label() const;
+    void setLabel(const NS::String* label);
 
-    class Device*           device() const;
+    class Device* device() const;
 
-    MTL::StorageMode        storageMode() const;
+    MTL::StorageMode storageMode() const;
 
-    MTL::CPUCacheMode       cpuCacheMode() const;
+    MTL::CPUCacheMode cpuCacheMode() const;
 
     MTL::HazardTrackingMode hazardTrackingMode() const;
 
-    MTL::ResourceOptions    resourceOptions() const;
+    MTL::ResourceOptions resourceOptions() const;
 
-    NS::UInteger            size() const;
+    NS::UInteger size() const;
 
-    NS::UInteger            usedSize() const;
+    NS::UInteger usedSize() const;
 
-    NS::UInteger            currentAllocatedSize() const;
+    NS::UInteger currentAllocatedSize() const;
 
-    NS::UInteger            maxAvailableSize(NS::UInteger alignment);
+    NS::UInteger maxAvailableSize(NS::UInteger alignment);
 
-    class Buffer*           newBuffer(NS::UInteger length, MTL::ResourceOptions options);
+    class Buffer* newBuffer(NS::UInteger length, MTL::ResourceOptions options);
 
-    class Texture*          newTexture(const class TextureDescriptor* desc);
+    class Texture* newTexture(const class TextureDescriptor* desc);
 
-    MTL::PurgeableState     setPurgeableState(MTL::PurgeableState state);
+    MTL::PurgeableState setPurgeableState(MTL::PurgeableState state);
 
-    MTL::HeapType           type() const;
+    MTL::HeapType type() const;
 
-    class Buffer*           newBuffer(NS::UInteger length, MTL::ResourceOptions options, NS::UInteger offset);
+    class Buffer* newBuffer(NS::UInteger length, MTL::ResourceOptions options, NS::UInteger offset);
 
-    class Texture*          newTexture(const class TextureDescriptor* descriptor, NS::UInteger offset);
+    class Texture* newTexture(const class TextureDescriptor* descriptor, NS::UInteger offset);
 };
 
-}
+} // namespace MTL
 
 // static method: alloc
 _MTL_INLINE MTL::HeapDescriptor* MTL::HeapDescriptor::alloc()
@@ -153,7 +150,8 @@ _MTL_INLINE MTL::HazardTrackingMode MTL::HeapDescriptor::hazardTrackingMode() co
     return Object::sendMessage<MTL::HazardTrackingMode>(this, _MTL_PRIVATE_SEL(hazardTrackingMode));
 }
 
-_MTL_INLINE void MTL::HeapDescriptor::setHazardTrackingMode(MTL::HazardTrackingMode hazardTrackingMode)
+_MTL_INLINE void MTL::HeapDescriptor::setHazardTrackingMode(
+    MTL::HazardTrackingMode hazardTrackingMode)
 {
     Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(setHazardTrackingMode_), hazardTrackingMode);
 }
@@ -242,25 +240,29 @@ _MTL_INLINE NS::UInteger MTL::Heap::currentAllocatedSize() const
 // method: maxAvailableSizeWithAlignment:
 _MTL_INLINE NS::UInteger MTL::Heap::maxAvailableSize(NS::UInteger alignment)
 {
-    return Object::sendMessage<NS::UInteger>(this, _MTL_PRIVATE_SEL(maxAvailableSizeWithAlignment_), alignment);
+    return Object::sendMessage<NS::UInteger>(
+        this, _MTL_PRIVATE_SEL(maxAvailableSizeWithAlignment_), alignment);
 }
 
 // method: newBufferWithLength:options:
 _MTL_INLINE MTL::Buffer* MTL::Heap::newBuffer(NS::UInteger length, MTL::ResourceOptions options)
 {
-    return Object::sendMessage<MTL::Buffer*>(this, _MTL_PRIVATE_SEL(newBufferWithLength_options_), length, options);
+    return Object::sendMessage<MTL::Buffer*>(
+        this, _MTL_PRIVATE_SEL(newBufferWithLength_options_), length, options);
 }
 
 // method: newTextureWithDescriptor:
 _MTL_INLINE MTL::Texture* MTL::Heap::newTexture(const MTL::TextureDescriptor* desc)
 {
-    return Object::sendMessage<MTL::Texture*>(this, _MTL_PRIVATE_SEL(newTextureWithDescriptor_), desc);
+    return Object::sendMessage<MTL::Texture*>(
+        this, _MTL_PRIVATE_SEL(newTextureWithDescriptor_), desc);
 }
 
 // method: setPurgeableState:
 _MTL_INLINE MTL::PurgeableState MTL::Heap::setPurgeableState(MTL::PurgeableState state)
 {
-    return Object::sendMessage<MTL::PurgeableState>(this, _MTL_PRIVATE_SEL(setPurgeableState_), state);
+    return Object::sendMessage<MTL::PurgeableState>(
+        this, _MTL_PRIVATE_SEL(setPurgeableState_), state);
 }
 
 // property: type
@@ -270,13 +272,17 @@ _MTL_INLINE MTL::HeapType MTL::Heap::type() const
 }
 
 // method: newBufferWithLength:options:offset:
-_MTL_INLINE MTL::Buffer* MTL::Heap::newBuffer(NS::UInteger length, MTL::ResourceOptions options, NS::UInteger offset)
+_MTL_INLINE MTL::Buffer* MTL::Heap::newBuffer(
+    NS::UInteger length, MTL::ResourceOptions options, NS::UInteger offset)
 {
-    return Object::sendMessage<MTL::Buffer*>(this, _MTL_PRIVATE_SEL(newBufferWithLength_options_offset_), length, options, offset);
+    return Object::sendMessage<MTL::Buffer*>(
+        this, _MTL_PRIVATE_SEL(newBufferWithLength_options_offset_), length, options, offset);
 }
 
 // method: newTextureWithDescriptor:offset:
-_MTL_INLINE MTL::Texture* MTL::Heap::newTexture(const MTL::TextureDescriptor* descriptor, NS::UInteger offset)
+_MTL_INLINE MTL::Texture* MTL::Heap::newTexture(
+    const MTL::TextureDescriptor* descriptor, NS::UInteger offset)
 {
-    return Object::sendMessage<MTL::Texture*>(this, _MTL_PRIVATE_SEL(newTextureWithDescriptor_offset_), descriptor, offset);
+    return Object::sendMessage<MTL::Texture*>(
+        this, _MTL_PRIVATE_SEL(newTextureWithDescriptor_offset_), descriptor, offset);
 }

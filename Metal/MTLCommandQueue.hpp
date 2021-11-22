@@ -26,15 +26,13 @@
 
 #include <Foundation/Foundation.hpp>
 
-namespace MTL
-{
-class CommandQueue : public NS::Referencing<CommandQueue>
-{
+namespace MTL {
+class CommandQueue : public NS::Referencing<CommandQueue> {
 public:
-    NS::String*          label() const;
-    void                 setLabel(const NS::String* label);
+    NS::String* label() const;
+    void setLabel(const NS::String* label);
 
-    class Device*        device() const;
+    class Device* device() const;
 
     class CommandBuffer* commandBuffer();
 
@@ -42,10 +40,10 @@ public:
 
     class CommandBuffer* commandBufferWithUnretainedReferences();
 
-    void                 insertDebugCaptureBoundary();
+    void insertDebugCaptureBoundary();
 };
 
-}
+} // namespace MTL
 
 // property: label
 _MTL_INLINE NS::String* MTL::CommandQueue::label() const
@@ -71,15 +69,18 @@ _MTL_INLINE MTL::CommandBuffer* MTL::CommandQueue::commandBuffer()
 }
 
 // method: commandBufferWithDescriptor:
-_MTL_INLINE MTL::CommandBuffer* MTL::CommandQueue::commandBuffer(const MTL::CommandBufferDescriptor* descriptor)
+_MTL_INLINE MTL::CommandBuffer* MTL::CommandQueue::commandBuffer(
+    const MTL::CommandBufferDescriptor* descriptor)
 {
-    return Object::sendMessage<MTL::CommandBuffer*>(this, _MTL_PRIVATE_SEL(commandBufferWithDescriptor_), descriptor);
+    return Object::sendMessage<MTL::CommandBuffer*>(
+        this, _MTL_PRIVATE_SEL(commandBufferWithDescriptor_), descriptor);
 }
 
 // method: commandBufferWithUnretainedReferences
 _MTL_INLINE MTL::CommandBuffer* MTL::CommandQueue::commandBufferWithUnretainedReferences()
 {
-    return Object::sendMessage<MTL::CommandBuffer*>(this, _MTL_PRIVATE_SEL(commandBufferWithUnretainedReferences));
+    return Object::sendMessage<MTL::CommandBuffer*>(
+        this, _MTL_PRIVATE_SEL(commandBufferWithUnretainedReferences));
 }
 
 // method: insertDebugCaptureBoundary

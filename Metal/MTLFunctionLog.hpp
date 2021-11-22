@@ -28,42 +28,38 @@
 
 #include "MTLFunctionLog.hpp"
 
-namespace MTL
-{
-_MTL_ENUM(NS::UInteger, FunctionLogType) {
+namespace MTL {
+_MTL_ENUM(NS::UInteger, FunctionLogType){
     FunctionLogTypeValidation = 0,
 };
 
-class LogContainer : public NS::Referencing<LogContainer, NS::FastEnumeration>
-{
+class LogContainer : public NS::Referencing<LogContainer, NS::FastEnumeration> {
 public:
 };
 
-class FunctionLogDebugLocation : public NS::Referencing<FunctionLogDebugLocation>
-{
+class FunctionLogDebugLocation : public NS::Referencing<FunctionLogDebugLocation> {
 public:
-    NS::String*  functionName() const;
+    NS::String* functionName() const;
 
-    NS::URL*     URL() const;
+    NS::URL* URL() const;
 
     NS::UInteger line() const;
 
     NS::UInteger column() const;
 };
 
-class FunctionLog : public NS::Referencing<FunctionLog>
-{
+class FunctionLog : public NS::Referencing<FunctionLog> {
 public:
-    MTL::FunctionLogType            type() const;
+    MTL::FunctionLogType type() const;
 
-    NS::String*                     encoderLabel() const;
+    NS::String* encoderLabel() const;
 
-    class Function*                 function() const;
+    class Function* function() const;
 
     class FunctionLogDebugLocation* debugLocation() const;
 };
 
-}
+} // namespace MTL
 
 // property: functionName
 _MTL_INLINE NS::String* MTL::FunctionLogDebugLocation::functionName() const
@@ -110,5 +106,6 @@ _MTL_INLINE MTL::Function* MTL::FunctionLog::function() const
 // property: debugLocation
 _MTL_INLINE MTL::FunctionLogDebugLocation* MTL::FunctionLog::debugLocation() const
 {
-    return Object::sendMessage<MTL::FunctionLogDebugLocation*>(this, _MTL_PRIVATE_SEL(debugLocation));
+    return Object::sendMessage<MTL::FunctionLogDebugLocation*>(
+        this, _MTL_PRIVATE_SEL(debugLocation));
 }

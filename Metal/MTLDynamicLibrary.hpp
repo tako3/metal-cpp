@@ -26,9 +26,8 @@
 
 #include <Foundation/Foundation.hpp>
 
-namespace MTL
-{
-_MTL_ENUM(NS::UInteger, DynamicLibraryError) {
+namespace MTL {
+_MTL_ENUM(NS::UInteger, DynamicLibraryError){
     DynamicLibraryErrorNone = 0,
     DynamicLibraryErrorInvalidFile = 1,
     DynamicLibraryErrorCompilationFailure = 2,
@@ -37,20 +36,19 @@ _MTL_ENUM(NS::UInteger, DynamicLibraryError) {
     DynamicLibraryErrorUnsupported = 5,
 };
 
-class DynamicLibrary : public NS::Referencing<DynamicLibrary>
-{
+class DynamicLibrary : public NS::Referencing<DynamicLibrary> {
 public:
-    NS::String*   label() const;
-    void          setLabel(const NS::String* label);
+    NS::String* label() const;
+    void setLabel(const NS::String* label);
 
     class Device* device() const;
 
-    NS::String*   installName() const;
+    NS::String* installName() const;
 
-    bool          serializeToURL(const NS::URL* url, NS::Error** error);
+    bool serializeToURL(const NS::URL* url, NS::Error** error);
 };
 
-}
+} // namespace MTL
 
 // property: label
 _MTL_INLINE NS::String* MTL::DynamicLibrary::label() const
